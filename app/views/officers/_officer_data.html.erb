@@ -1,0 +1,24 @@
+<div class="card">
+  <div class="card-content">
+    <h5>Officer Information for <%= @officer.proper_name %></h5><br />
+
+    <b>Current Unit:&nbsp;&nbsp;</b>
+      <%= link_to @officer.unit.name, unit_path(@officer.unit) %>
+      <% if @officer.user.role?(:chief) %>
+        &nbsp;&nbsp;<i>*Unit Chief</i>
+      <% end%>     
+      <br /><br />
+
+    <b>Current Rank:&nbsp;&nbsp;</b>
+      <%= @officer.rank %><br /><br />
+
+    <b>SSN:&nbsp;&nbsp;</b>
+      <%= @officer.ssn %><br /><br />
+
+    <b>Username:&nbsp;&nbsp;</b>
+      <%= @officer.user.username %><br /><br />
+
+    <b>Active with GCPD?&nbsp;&nbsp;</b>
+      <%= @officer.active ? "Yes" : "No" %><br><br><br>
+  </div>
+</div>

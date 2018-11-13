@@ -1,0 +1,2 @@
+module InvestigationNotesHelper
+end

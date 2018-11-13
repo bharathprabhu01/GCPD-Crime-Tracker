@@ -1,0 +1,28 @@
+<% unless @current_assignments.empty? %>
+  <div class="card">
+    <div class="card-content">
+      <span class="card-title">Current Assignments</span>
+      <table class="lined">
+        <thead>
+          <th>Officer</th>
+          <th>Starting</th>
+        </thead>
+          <% for assignment in @current_assignments %>
+            <tr>
+              <td>
+                &nbsp;<%= link_to assignment.officer.name, officer_path(assignment.officer) %>
+              </td>
+              <td><%= assignment.start_date.strftime("%m/%d/%y") %></td>
+            </tr>
+          <% end %>
+      </table>
+
+		<%# allow to add a new assignment might be nice %>
+
+    </div>
+  </div>
+<% else%>
+
+	<%# allow to add a new assignment might be nice %>
+
+<% end%>

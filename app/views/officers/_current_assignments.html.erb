@@ -1,0 +1,39 @@
+<% unless @current_assignments.empty? %>
+  <div class="card">
+    <div class="card-content">
+      <span class="card-title">Current Assignments</span>
+      <table class="lined">
+        <thead>
+          <th>Case</th>
+          <th>Starting</th>
+        </thead>
+          <% for assignment in @current_assignments %>
+            <tr>
+              <td>
+                <% if can? :terminate, Assignment %>
+                  <%= link_to(terminate_assignment_path(assignment, from: "officer"), class: 'remove', method: :patch) do %>
+                    x&nbsp;&nbsp;
+                  <% end %>
+                <% end %>
+                &nbsp;<%= link_to assignment.investigation.title, investigation_path(assignment.investigation) %>
+              </td>
+              <td><%= assignment.start_date.strftime("%m/%d/%y") %></td>
+            </tr>
+          <% end %>
+      </table>
+      <% if can? :new, Assignment %>
+      <div class="card-action">
+        <%= link_to "Add a new assignment", new_assignment_path(officer_id: @officer.id) %>
+      </div>
+    <% end %>
+    </div>
+  </div>
+<% else%>
+  <% if can? :new, Assignment %>
+    <div class="card grey lighten-3">
+      <div class="card-action">
+        <%= link_to "Add a new assignment", new_assignment_path(officer_id: @officer.id) %>
+      </div>
+    </div>
+  <% end %>
+<% end%>

@@ -1,0 +1,22 @@
+<h4><%= state.capitalize %> Investigations in GCPD</h4>
+
+<% if investigations.empty? %>
+  <p>There are no <%= state.downcase %> investigations at this time.</p>
+<% else %>
+
+  <table class="striped highlight">
+    <thead>
+      <th>Title</th>
+      <th>Date <%= state %></th>
+    </thead>
+    <% for investigation in investigations %>
+      <tr>
+        <td><%= link_to investigation.title, investigation_path(investigation) %></td>
+        <td><%= display_date(investigation, state) %></td>
+      </tr>
+    <% end %>
+  </table>
+  <p class="supertiny"></p>
+  <br />
+  <%= will_paginate investigations, previous_label: "Previous&nbsp;", next_label: "&nbsp;Next" %>
+<% end %>

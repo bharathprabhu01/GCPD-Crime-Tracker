@@ -1,0 +1,38 @@
+<div class="card">
+  <div class="card-content">
+    <h5>Information for <%= @investigation.title %></h5><br />
+
+    <b>Crimes committed:&nbsp;&nbsp;</b><br />
+      <% @case_crimes.each do |crime| %> 
+        <!-- <li><%# crime.name %></li> -->
+
+
+        <%= crime.name %><br />
+      <% end %>
+
+
+      <br /><br />
+
+    <b>Location:&nbsp;&nbsp;</b>
+      <%= @investigation.crime_location %>   
+      <br /><br />
+
+    <b>Description:&nbsp;&nbsp;</b><br />
+      <%= @investigation.description %><br /><br />
+
+    <b>Date opened:&nbsp;&nbsp;</b>
+      <%= @investigation.date_opened.strftime("%B %d, %Y") %><br /><br />
+
+    <% unless @investigation.date_closed.nil? %>
+      <b>Date closed:&nbsp;&nbsp;</b>
+        <%= @investigation.date_closed.strftime("%B %d, %Y") %><br /><br />
+    <% end%>
+
+    <b>Was Batman involved?&nbsp;&nbsp;</b>
+      <%= @investigation.batman_involved ? "Yes" : "No" %><br /><br />
+
+    <b>Case solved?&nbsp;&nbsp;</b>
+      <%= @investigation.solved ? "Yes" : "No" %><br /><br />
+
+  </div>
+</div>

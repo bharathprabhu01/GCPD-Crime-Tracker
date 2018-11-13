@@ -1,0 +1,14 @@
+<div class="card">
+  <div class="card-content">
+    <h5>Information for <%= @unit.name %></h5><br />
+
+    <b>Number of Active Officers:&nbsp;&nbsp;</b>
+      <%= @unit.number_of_active_officers %>
+      <br /><br />
+
+    <b>Number of Open Cases:&nbsp;&nbsp;</b>
+      <%= @unit.number_of_unique_open_investigations %>
+      <br /><br />
+
+  </div>
+</div>

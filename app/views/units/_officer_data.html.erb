@@ -1,0 +1,22 @@
+<h4>Active Officers in <%= @unit.name %></h4>
+<% if @officers.empty? %>
+  <h4>There are no active officers currently in this unit.</h4>
+<% else %>
+  <table class="striped highlight">
+    <thead>
+      <th>Name</th>
+      <th>Rank</th>
+      <th class="align_center">Active Assignments</th>
+    </thead>
+    <% for officer in @officers %>
+      <tr>
+        <td><%= link_to officer.name, officer_path(officer) %></td>
+        <td><%= officer.rank %></td>
+        <td class="align_center"><%= officer.assignments.current.count %></td>
+      </tr>
+    <% end %>
+  </table>
+  <br />
+  <%= will_paginate @officers, previous_label: "Previous&nbsp;", next_label: "&nbsp;Next" %>
+<% end %>
+<p>&nbsp;</p>

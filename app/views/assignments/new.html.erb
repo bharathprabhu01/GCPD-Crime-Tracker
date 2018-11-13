@@ -1,0 +1,5 @@
+<% if @officer_investigations.nil? %>
+  <%= render :partial => "assign_from_investigation" %>
+<% else %>
+  <%= render :partial => "assign_from_officer" %>
+<% end %>

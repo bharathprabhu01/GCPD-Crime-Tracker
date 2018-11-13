@@ -1,0 +1,34 @@
+<h4><%= state.capitalize %> Units in GCPD</h4>
+
+<% if units.empty? %>
+  <p>There are no <%= state.downcase %> units at this time.</p>
+<% else %>
+
+  <table class="striped highlight">
+    <thead>
+      <th>Unit</th>
+
+
+      <th class="align_center">Edit</th>
+    </thead>
+    <% for unit in units %>
+      <tr>
+        <!-- <td><%# best_in_place unit, :name, as: :input %></td> -->
+        <td><%= link_to unit.name, unit_path(unit) %></td>
+
+
+
+
+
+      <td class="align_center">
+        <%= link_to edit_unit_path(unit) do %>
+          <i class="material-icons">edit</i>
+        <% end %>
+      </td>
+      </tr>
+    <% end %>
+  </table>
+  <p class="supertiny"></p>
+  <br />
+  <%= will_paginate units, previous_label: "Previous&nbsp;", next_label: "&nbsp;Next" %>
+<% end %>

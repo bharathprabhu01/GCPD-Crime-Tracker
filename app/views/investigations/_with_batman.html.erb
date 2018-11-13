@@ -1,0 +1,21 @@
+<% unless @with_batman.empty? %>
+  <div class="card">
+    <div class="card-content">
+      <span class="card-title">Recent Cases Involving Batman</span>
+      <table class="lined">
+        <thead>
+          <th>Case</th>
+          <th>Open?</th>
+        </thead>
+          <% for investigation in @with_batman %>
+            <tr>
+              <td>&nbsp;<%= link_to investigation.title, investigation_path(investigation) %></td>
+              <td><%= investigation.date_closed.nil? ? "Yes" : "No" %></td>
+              
+            </tr>
+          <% end %>
+      </table>
+    </div>
+  </div>
+<% end%>
+<br />

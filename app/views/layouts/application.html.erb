@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>GCPD Tracking System</title>
+    <%= csrf_meta_tags %>
+
+    <%= stylesheet_link_tag 'application', media: 'all' %>
+    <%# javascript_include_tag 'application' %>
+    <%= stylesheet_link_tag "https://fonts.googleapis.com/icon?family=Material+Icons" %>
+    <%= stylesheet_link_tag "https://fonts.googleapis.com/css?family=Bitter|Josefin+Sans|Nunito|Varela+Round" %>
+  </head>
+
+  <body>
+    <header>
+    <!-- Partials for the topbar and navigation -->
+    <%= render :partial => "partials/topbar" %>
+    <% if logged_in? && ( current_user.role?(:commish) || current_user.role?(:chief) ) %>
+      <%= render :partial => "partials/nav" %>
+    <% elsif logged_in? && current_user.role?(:officer) %>
+      <%= render :partial => "partials/nav_officer" %>
+    <% else %>
+      <%= render :partial => "partials/nav_guest" %>
+    <% end %>
+    </header>
+    <main>
+    <div class="container">
+      <div class="row">
+        <div class="col s12">
+          <!-- Flash messages appear here -->
+          <%= render :partial => "partials/flash" %>
+
+          <!-- MAIN CONTENT OF TEMPLATE GOES HERE -->
+          <%= yield %>
+        </div>
+      </div>
+    </div>
+    </main>
+    
+    <%= render :partial => "partials/footer" %> 
+    <%= javascript_include_tag 'application' %>   
+  </body>
+</html>
+

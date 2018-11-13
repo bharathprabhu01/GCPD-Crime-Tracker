@@ -1,0 +1,36 @@
+<h4><%= state.capitalize %> Crimes in GCPD</h4>
+
+<% if crimes.empty? %>
+  <p>There are no <%= state.downcase %> crimes at this time.</p>
+<% else %>
+
+  <table class="striped highlight">
+    <thead>
+      <th>Crime</th>
+      <th>Level</th>
+
+
+      <th class="align_center">Edit</th>
+    </thead>
+    <% for crime in crimes %>
+      <tr>
+        <td><%= best_in_place crime, :name, as: :input %><%# crime.name %></td>
+        <td><%= crime.felony ? "Felony" : "Misdemeanor" %></td>
+
+
+
+
+
+
+        <td class="align_center">
+          <%= link_to edit_crime_path(crime) do %>
+              <i class="material-icons">edit</i>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </table>
+  <p class="supertiny"></p>
+  <br />
+  <%= will_paginate crimes, previous_label: "Previous&nbsp;", next_label: "&nbsp;Next" %>
+<% end %>

@@ -1,0 +1,30 @@
+<% opt = "#{object.respond_to?(:name) ? object.name : model_name.capitalize }" %>
+
+<div class="form-actions">
+  <% if can? :index, eval(model_name.capitalize) %>
+    <%= link_to(eval("#{model_name.pluralize}_path"), class: 'waves-effect waves-light btn') do %>
+      &nbsp;Display All <%# model_name.pluralize.capitalize %>
+    <% end %>
+    &nbsp;&nbsp;
+  <% end %>
+  
+  <% if can? :edit, object %>
+    <%= link_to(eval("edit_#{model_name}_path(object)"), class: 'waves-effect waves-light btn') do %>
+        &nbsp;<%= "Edit #{opt}" %>
+    <% end %>
+    &nbsp;&nbsp;
+  <% end %>
+  
+  <% if can?(:destroy, object) && controller.respond_to?(:destroy) %>
+    <%= link_to(eval("#{model_name}_path(object)"), method: 'delete', data: {confirm: "Are you sure you want to permanently delete #{opt}"}, class: 'waves-effect waves-light btn btn-alert') do %>
+        &nbsp;<%= "Delete #{opt}" %>
+    <% end %>
+  <% end %>
+
+    <%# This is just to handle the extra case of closing investigations  %>
+    <% if can?(:close, object) && controller.respond_to?(:close) && object.date_closed.nil? %>
+    <%= link_to(eval("close_#{model_name}_path(object)"), method: 'patch', data: {confirm: "Are you sure you want to close this #{opt} as of today?"}, class: 'waves-effect waves-light btn btn-alert') do %>
+        &nbsp;<%= "Close Now" %>
+    <% end %>
+  <% end %>
+</div>

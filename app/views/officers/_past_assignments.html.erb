@@ -1,0 +1,25 @@
+<% if @past_assignments.empty? %>
+  <h5>No past assignments</h5>
+<% else%>
+
+  <div class="card grey lighten-3">
+    <div class="card-content">
+      <span class="card-title">Past Assignments</span>
+      <table class="lined">
+        <thead>
+          <th>Case</th>
+          <th>Ending</th>
+        </thead>
+          <% for assignment in @past_assignments %>
+            <tr>
+              <td>&nbsp;<%= link_to assignment.investigation.title, investigation_path(assignment.investigation) %></td>
+              <td>
+                <%= assignment.end_date.strftime("%m/%d/%y") %>
+              </td>
+              
+            </tr>
+          <% end %>
+      </table>
+    </div>
+  </div>
+<% end%>
