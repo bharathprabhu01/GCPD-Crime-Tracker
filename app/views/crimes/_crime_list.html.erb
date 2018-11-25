@@ -5,28 +5,33 @@
 <% else %>
 
   <table class="striped highlight">
+    <!-- Header --> 
     <thead>
       <th>Crime</th>
       <th>Level</th>
-
-
-      <th class="align_center">Edit</th>
+      <% if can? :edit, crimes %>
+        <th class="align_center">Edit</th>
+      <% end %>
     </thead>
+    
+    <!-- Data --> 
     <% for crime in crimes %>
       <tr>
-        <td><%= best_in_place crime, :name, as: :input %><%# crime.name %></td>
-        <td><%= crime.felony ? "Felony" : "Misdemeanor" %></td>
-
-
-
-
-
-
-        <td class="align_center">
-          <%= link_to edit_crime_path(crime) do %>
-              <i class="material-icons">edit</i>
-          <% end %>
-        </td>
+        <% if can? :edit, crimes %>
+          <td><%= best_in_place crime, :name, as: :input %></td>
+          <td><%= crime.felony ? "Felony" : "Misdemeanor" %></td>
+        <% else %>
+          <td><%= crime.name %></td>
+          <td><%= crime.felony ? "Felony" : "Misdemeanor" %></td>
+        <% end %>
+        
+        <% if can? :edit, crimes %>
+          <td class="align_center">
+            <%= link_to edit_crime_path(crime) do %>
+                <i class="material-icons">edit</i>
+            <% end %>
+          </td>
+        <% end %>
       </tr>
     <% end %>
   </table>
