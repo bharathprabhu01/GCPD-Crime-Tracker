@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   get 'home/about', to: 'home#about', as: :about
   get 'home/contact', to: 'home#contact', as: :contact
   get 'home/privacy', to: 'home#privacy', as: :privacy
-
+  get 'home/search', to: 'home#search', as: :search
 
   # Authentication routes
   resources :sessions
@@ -14,9 +14,6 @@ Rails.application.routes.draw do
   get 'user/edit', to: 'users#edit', as: :edit_current_user
   get 'login', to: 'sessions#new', as: :login
   get 'logout', to: 'sessions#destroy', as: :logout
-
-
-
 
   # Resource routes (maps HTTP verbs to controller actions automatically):
   resources :officers
@@ -33,9 +30,7 @@ Rails.application.routes.draw do
 
 
 
-
   # Other custom routes
-
 
 
 
