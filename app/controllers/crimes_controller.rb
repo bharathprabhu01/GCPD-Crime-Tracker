@@ -1,7 +1,6 @@
 class CrimesController < ApplicationController
   before_action :check_login
   
-  
   def index
     @active_crimes = Crime.active.alphabetical.paginate(page: params[:page]).per_page(10)
     @inactive_crimes = Crime.inactive.alphabetical.paginate(page: params[:page]).per_page(10)
