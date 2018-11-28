@@ -49,17 +49,6 @@ class InvestigationsController < ApplicationController
     end
   end
 
-
-
-
-
-
-
-
-
-
-
-
   private
   def set_investigation
     @investigation = Investigation.find(params[:id])

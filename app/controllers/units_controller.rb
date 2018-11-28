@@ -1,7 +1,6 @@
 class UnitsController < ApplicationController
   before_action :check_login
   authorize_resource
-
   
   def index
     @active_units = Unit.active.alphabetical.paginate(page: params[:page]).per_page(10)
@@ -35,18 +34,21 @@ class UnitsController < ApplicationController
     respond_to do |format|
       if @unit.update_attributes(unit_params)
         format.html { redirect_to @unit, notice: "Updated information" }
-
       else
         format.html { render :action => "edit" }
-
       end
     end
   end
-
-
-
-
-
+  
+  def destroy
+    @unit = Unit.find(params[:id])
+    if @unit.destroy
+      redirect_to units_path, notice: "Successfully removed #{@unit.name} from GCPD."
+    else
+      @officers = @unit.officers.active.alphabetical.paginate(page: params[:page]).per_page(10)
+      render action: 'show'
+    end
+  end
 
   private
   def unit_params

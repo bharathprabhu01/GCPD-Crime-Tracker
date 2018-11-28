@@ -3,7 +3,7 @@
 <div class="form-actions">
   <% if can? :index, eval(model_name.capitalize) %>
     <%= link_to(eval("#{model_name.pluralize}_path"), class: 'waves-effect waves-light btn') do %>
-      &nbsp;Display All <%# model_name.pluralize.capitalize %>
+      &nbsp;Display All <%= model_name.pluralize.capitalize %>
     <% end %>
     &nbsp;&nbsp;
   <% end %>

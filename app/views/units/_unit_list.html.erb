@@ -7,29 +7,31 @@
   <table class="striped highlight">
     <thead>
       <th>Unit</th>
-
-
-      <th class="align_center">Edit</th>
+      <th class="align_center">Options</th>
     </thead>
     <% for unit in units %>
       <tr>
-        <!-- <td><%# best_in_place unit, :name, as: :input %></td> -->
+        <!--<td><%# best_in_place unit, :name, as: :input %></td>-->
         <% if can? :show, unit %>
           <td><%= link_to unit.name, unit_path(unit) %></td>
         <% else %>
           <td><%= unit.name %></td>
         <% end %>
         
-
-
-
-
-
-      <td class="align_center">
-        <%= link_to edit_unit_path(unit) do %>
-          <i class="material-icons">edit</i>
-        <% end %>
-      </td>
+        <!-- Edit and Delete Paths -->
+        <td class="align_center">
+          <% if can? :edit, unit %>
+            <%= link_to edit_unit_path(unit) do %>
+              <i class="material-icons">edit</i>
+            <% end %>
+          <% end %>
+          &nbsp;&nbsp;&nbsp;&nbsp; 
+          <% if can? :delete, unit %>
+            <%= link_to(unit_path(unit), method: :delete, data: { confirm: 'Are you sure you wish to delete this unit?' }) do %>
+              <i class="material-icons">delete</i>
+            <% end %>
+          <% end %>
+        </td>
       </tr>
     <% end %>
   </table>
