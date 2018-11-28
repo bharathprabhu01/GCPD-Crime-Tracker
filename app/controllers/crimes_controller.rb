@@ -1,5 +1,6 @@
 class CrimesController < ApplicationController
   before_action :check_login, only: [:show, :edit, :update]
+  authorize_resource
   
   def index
     @active_crimes = Crime.active.alphabetical.paginate(page: params[:page]).per_page(10)
