@@ -7,7 +7,7 @@
   <table class="striped highlight">
     <thead>
       <th>Unit</th>
-      <% if can? :edit, units or can? :delete, units %>
+      <% if can? :read, units %>
         <th class="align_center">Options</th>
       <% end %>
     </thead>

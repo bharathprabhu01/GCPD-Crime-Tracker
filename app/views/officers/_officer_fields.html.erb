@@ -1,9 +1,9 @@
 <%= f.input :first_name, label_html: { class: 'active' } %>
 <%= f.input :last_name, label_html: { class: 'active' } %>
 <%= f.input :rank, label_html: { class: 'active' } %>
-<% if current_user.role?(:commish) %>
-  <%= f.input :role, collection: User::ROLES, include_blank: true %>
-<% end %>
+<!--<%# if current_user.role?(:commish) %>-->
+<!--  <%#= f.input :role, collection: User::ROLES, include_blank: true %>-->
+<!--<%# end %>-->
 <%= f.input :unit_id, collection: Unit.alphabetical.to_a, include_blank: true %>
 <%= f.input :ssn, label_html: { class: 'active' } %>
 <%= f.input :active %>

@@ -13,8 +13,10 @@
     <header>
     <!-- Partials for the topbar and navigation -->
     <%= render :partial => "partials/topbar" %>
-    <% if logged_in? && ( current_user.role?(:commish) || current_user.role?(:chief) ) %>
+    <% if logged_in? && current_user.role?(:commish) %>
       <%= render :partial => "partials/nav" %>
+    <% elsif logged_in? && current_user.role?(:chief) %>
+      <%= render :partial => "partials/nav_chief" %>
     <% elsif logged_in? && current_user.role?(:officer) %>
       <%= render :partial => "partials/nav_officer" %>
     <% else %>
