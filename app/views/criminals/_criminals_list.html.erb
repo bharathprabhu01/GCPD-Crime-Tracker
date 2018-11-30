@@ -1,36 +1,34 @@
+
+
+
 <h4>Criminals at GCPD</h4>
 
-<table class="striped highlight">
+<table id="criminals" class="striped highlight">
   <thead>
     <th>Name</th>
-    <th>Felon?</th>
+    <th>Convicted Felon?</th>
     <th>Enhanced Powers?</th>
-    <% if current_user.role? :commish or current_user.role? :chief %>
-      <th class="align_center">Options</th>
-    <% end %>
+    <th class="align_center">Options</th>
   </thead>
   
   <% for criminal in @criminals %>
     <tr>
-      <% if current_user.role? :commish or current_user.role? :chief %>
-        <td><%= link_to criminal.name, criminal_path(criminal) %></td>
-      <% else %>
-        <td><%= criminal.name %></td>
-      <% end %>
+      <td><%= link_to criminal.name, criminal_path(criminal) %></td>
       <td><%= criminal.convicted_felon ? "Yes" : "No" %></td>
       <td><%= criminal.enhanced_powers ? "Yes" : "No" %></td>
       
-      <% if current_user.role? :commish or current_user.role? :chief %>
-        <td class="align_center">
+      <td class="align_center">
         <%= link_to edit_criminal_path(criminal) do %>
-              <i class="material-icons">edit</i>
-          <% end %>
-          &nbsp;&nbsp;&nbsp;&nbsp; 
+            <i class="material-icons">edit</i>
+        <% end %>
+        &nbsp;&nbsp;&nbsp;&nbsp; 
+        <% if current_user.role? :commish or current_user.role? :chief %>
           <%= link_to(criminal_path(criminal), method: :delete, data: { confirm: 'Are you sure you wish to delete this criminal?' }) do %>
               <i class="material-icons">delete</i>
           <% end %>
-        </td>
-      <% end %>
+        <% end %>
+      </td>
+      
     </tr>
   <% end %>
 </table>

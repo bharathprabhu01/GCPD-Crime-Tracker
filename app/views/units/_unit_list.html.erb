@@ -7,11 +7,13 @@
   <table class="striped highlight">
     <thead>
       <th>Unit</th>
-      <th class="align_center">Options</th>
+      <% if can? :edit, units or can? :delete, units %>
+        <th class="align_center">Options</th>
+      <% end %>
     </thead>
+    
     <% for unit in units %>
       <tr>
-        <!--<td><%# best_in_place unit, :name, as: :input %></td>-->
         <% if can? :show, unit %>
           <td><%= link_to unit.name, unit_path(unit) %></td>
         <% else %>

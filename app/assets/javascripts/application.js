@@ -11,6 +11,7 @@
 // about supported directives.
 //
 //= require jquery
+//= require jquery-tablesorter
 //= require rails-ujs
 //= require materialize-sprockets
 //= require materialize-form
@@ -64,3 +65,10 @@ $(document).ready(function() {
     }
   }
 });
+
+
+// Or with jQuery
+$('.dropdown-trigger').dropdown();
+
+
+
