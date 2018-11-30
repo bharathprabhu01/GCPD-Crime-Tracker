@@ -2,7 +2,8 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
-$('select.enhanced_filter').on 'change', ->
+$('button').on 'click', ->
   $(this).parents('form').submit()
-
+  
+  
 $("select option[value='Select an Option']").attr('disabled', true); 

@@ -1,0 +1,14 @@
+<h5><em> Criminal Filter Options </em></h5>
+
+  <%= form_tag criminals_path, :method => 'get' do %>
+    <label> Convicted Felon? </label>
+    <%= select_tag "felon_filter", options_for_select(["Select an Option", "Yes", "No"], params[:felon_filter]), class: 'felon_filter' %>
+    
+    <br>
+    
+    <label> Enhanced Powers? </label>
+    <%= select_tag "enhanced_filter", options_for_select(["Select an Option", "Yes", "No"], params[:enhanced_filter]), class: 'enhanced_filter' %>
+    <%= button_tag(type: 'button') do
+        content_tag(:strong, 'Submit')
+      end %>
+  <% end %>

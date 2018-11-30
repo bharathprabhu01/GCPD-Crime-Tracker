@@ -4,15 +4,28 @@ class CriminalsController < ApplicationController
   authorize_resource
   
   def index
-    # Filter by power status
-    if(params[:enhanced_filter] == nil)
-      @criminals = Criminal.alphabetical.paginate(page: params[:page]).per_page(10)
-      
-    elsif(params[:enhanced_filter] == "Yes")
-      @criminals = Criminal.enhanced.alphabetical.paginate(page: params[:page]).per_page(10)
-      
-    else
-      @criminals = Criminal.where(enhanced_powers: false).alphabetical.paginate(page: params[:page]).per_page(10)
+    @criminals = Criminal.alphabetical.paginate(page: params[:page]).per_page(10)
+    bool_enhanced, bool_felon = nil, nil
+    if(params[:enhanced_filter].nil? == false) 
+      if(params[:enhanced_filter] == "Yes")
+        bool_enhanced = true
+      else
+        bool_enhanced = false
+      end
+    end
+    if(params[:felon_filter].nil? == false) 
+      if(params[:felon_filter] == "Yes")
+        bool_felon = true
+      else
+        bool_felon = false
+      end
+    end
+    if((bool_enhanced.nil? == false) and bool_felon.nil?)
+      @criminals = Criminal.where(enhanced_powers: bool_enhanced).alphabetical.paginate(page: params[:page]).per_page(10)
+    elsif((bool_felon.nil? == false) and bool_enhanced.nil?)
+      @criminals = Criminal.where(convicted_felon: bool_felon).alphabetical.paginate(page: params[:page]).per_page(10)
+    elsif((bool_felon.nil? == false) and (bool_enhanced.nil? == false))
+      @criminals = Criminal.where(enhanced_powers: bool_enhanced, convicted_felon: bool_felon).alphabetical.paginate(page: params[:page]).per_page(10)
     end
   end
 
