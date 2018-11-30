@@ -1,0 +1,41 @@
+<h4>Criminals at GCPD</h4>
+
+<table class="striped highlight">
+  <thead>
+    <th>Name</th>
+    <th>Felon?</th>
+    <th>Enhanced Powers?</th>
+    <% if current_user.role? :commish or current_user.role? :chief %>
+      <th class="align_center">Options</th>
+    <% end %>
+  </thead>
+  
+  <% for criminal in @criminals %>
+    <tr>
+      <% if current_user.role? :commish or current_user.role? :chief %>
+        <td><%= link_to criminal.name, criminal_path(criminal) %></td>
+      <% else %>
+        <td><%= criminal.name %></td>
+      <% end %>
+      <td><%= criminal.convicted_felon ? "Yes" : "No" %></td>
+      <td><%= criminal.enhanced_powers ? "Yes" : "No" %></td>
+      
+      <% if current_user.role? :commish or current_user.role? :chief %>
+        <td class="align_center">
+        <%= link_to edit_criminal_path(criminal) do %>
+              <i class="material-icons">edit</i>
+          <% end %>
+          &nbsp;&nbsp;&nbsp;&nbsp; 
+          <%= link_to(criminal_path(criminal), method: :delete, data: { confirm: 'Are you sure you wish to delete this criminal?' }) do %>
+              <i class="material-icons">delete</i>
+          <% end %>
+        </td>
+      <% end %>
+    </tr>
+  <% end %>
+</table>
+
+<br />
+<%= will_paginate @criminals, previous_label: "Previous&nbsp;", next_label: "&nbsp;Next" %>
+<p>&nbsp;</p>
+<%= render :partial => "partials/add_new_object", locals: {model_name: 'criminal'} %>

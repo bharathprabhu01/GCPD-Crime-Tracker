@@ -1,0 +1,20 @@
+<% unless @cases.empty? %>
+  <div class="card">
+    <div class="card-content">
+      <span class="card-title">Suspect History</span>
+      <table class="lined">
+        <thead>
+          <th>Case</th>
+          <th>Open?</th>
+        </thead>
+          <% for investigation in @cases %>
+            <tr>
+              <td>&nbsp;<%= link_to investigation.title, investigation_path(investigation) %></td>
+              <td><%= investigation.date_closed.nil? ? "Yes" : "No" %></td>
+            </tr>
+          <% end %>
+      </table>
+    </div>
+  </div>
+<% end%>
+<br />
