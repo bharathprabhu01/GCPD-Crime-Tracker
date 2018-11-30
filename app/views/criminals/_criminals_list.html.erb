@@ -1,13 +1,15 @@
-
-
-
 <h4>Criminals at GCPD</h4>
 
 <table id="criminals" class="striped highlight">
   <thead>
     <th>Name</th>
     <th>Convicted Felon?</th>
-    <th>Enhanced Powers?</th>
+    <th>
+      <label>Enhanced Powers?</label>
+      <%= form_tag criminals_path, :method => 'get' do %>  
+        <%= select_tag "enhanced_filter", options_for_select(["Select an Option", "Yes", "No"], params[:enhanced_filter]), class: 'enhanced_filter' %>
+      <% end %>
+    </th>
     <th class="align_center">Options</th>
   </thead>
   

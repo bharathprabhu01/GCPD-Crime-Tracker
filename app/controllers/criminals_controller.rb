@@ -4,7 +4,16 @@ class CriminalsController < ApplicationController
   authorize_resource
   
   def index
-    @criminals = Criminal.alphabetical.paginate(page: params[:page]).per_page(10)
+    # Filter by power status
+    if(params[:enhanced_filter] == nil)
+      @criminals = Criminal.alphabetical.paginate(page: params[:page]).per_page(10)
+      
+    elsif(params[:enhanced_filter] == "Yes")
+      @criminals = Criminal.enhanced.alphabetical.paginate(page: params[:page]).per_page(10)
+      
+    else
+      @criminals = Criminal.where(enhanced_powers: false).alphabetical.paginate(page: params[:page]).per_page(10)
+    end
   end
 
   def new
