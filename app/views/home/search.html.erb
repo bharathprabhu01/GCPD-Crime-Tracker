@@ -1,2 +1,16 @@
-<h1>Home#search</h1>
-<p>Find me in app/views/home/search.html.erb</p>
+<h5>Search result for term <em>'<%= @query %>'</em> resulted in <%= pluralize(@total_hits, 'hit') %></h5>
+<p class="supertiny">&nbsp;</p>
+
+<% unless @criminals.empty? %>
+  <p><em><strong>Criminals matching term '<%= @query %>'</strong></em></p>
+  <ul>
+    <% if @criminals.size == 1 %>
+     <%= link_to  criminal_path(@criminals) %>
+    <% else %>
+      <% for criminal in @criminals do %>
+        <li><%= link_to criminal.name, criminal_path(criminal) %></li>
+      <% end %>
+    <% end %>
+  </ul>
+  <p class="smtext">&nbsp;</p>
+<% end %>
