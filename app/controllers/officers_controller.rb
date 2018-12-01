@@ -42,9 +42,15 @@ class OfficersController < ApplicationController
       end
     end
   end
-
-
-
+  
+  def search
+    redirect_back(fallback_location: home_path) if params[:query].blank?
+    @query = params[:query]
+    @officers = Officer.search(@query)
+    if(@officers.size == 1)
+      redirect_to @officers.first
+    end
+  end
 
 
   private

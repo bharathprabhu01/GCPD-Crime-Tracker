@@ -15,13 +15,6 @@ Rails.application.routes.draw do
   get 'login', to: 'sessions#new', as: :login
   get 'logout', to: 'sessions#destroy', as: :logout
 
-  # Resource routes (maps HTTP verbs to controller actions automatically):
-  resources :officers
-  resources :units
-  resources :investigations
-  resources :crimes
-  resources :criminals
-
   # Routes for assignments
   get 'assignments/new', to: 'assignments#new', as: :new_assignment
   post 'assignments', to: 'assignments#create', as: :assignments
@@ -36,8 +29,16 @@ Rails.application.routes.draw do
 
 
   # Routes for searching
-
-
+  get 'criminals/search', to: 'criminals#search', as: :criminal_search
+  get 'officers/search', to: 'officers#search', as: :officer_search
+  get 'investigations/search', to: 'investigations#search', as: :investigation_search
+  
+  # Resource routes (maps HTTP verbs to controller actions automatically):
+  resources :criminals
+  resources :officers
+  resources :units
+  resources :investigations
+  resources :crimes
 
 
   # You can have the root of your site routed with 'root'

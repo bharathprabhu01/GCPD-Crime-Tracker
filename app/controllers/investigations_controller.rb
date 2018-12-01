@@ -48,6 +48,15 @@ class InvestigationsController < ApplicationController
       end
     end
   end
+  
+  def search
+    redirect_back(fallback_location: home_path) if params[:query].blank?
+    @query = params[:query]
+    @investigations = Investigation.title_search(@query)
+    if(@investigations.size == 1)
+      redirect_to @investigations.first
+    end
+  end
 
   private
   def set_investigation

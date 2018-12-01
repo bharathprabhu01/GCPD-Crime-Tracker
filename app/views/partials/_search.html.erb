@@ -1,1 +1,8 @@
-stuff goes here...
+<div class="row">
+  <div class="col s12">
+    <h5><em><%= eval(model_name.capitalize) %> Search</em></h5>
+    <%= form_with url: eval("#{model_name}_search_path"), method: :get, class: 'form-inline', id: "search" do %>
+      <%= text_field_tag 'query', '', placeholder: "Search ..." %>
+    <% end %>
+  </div>
+</div>

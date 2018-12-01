@@ -11,8 +11,10 @@
     <%= button_tag(type: 'button') do
         content_tag(:strong, 'Submit')
       end %>
-    
-    <br>
-    <br>
-    <%= render :partial => "partials/criminal_search" %>
+      
   <% end %>
+    
+  <br>
+  <br>
+  
+  <%= render :partial => "partials/search", locals: {model_name: "criminal"} %>

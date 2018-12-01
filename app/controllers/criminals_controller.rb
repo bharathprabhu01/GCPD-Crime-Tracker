@@ -6,6 +6,8 @@ class CriminalsController < ApplicationController
   def index
     @criminals = Criminal.alphabetical.paginate(page: params[:page]).per_page(10)
     bool_enhanced, bool_felon = nil, nil
+    
+    # set boolean values to filter index page
     if(params[:enhanced_filter].nil? == false) 
       if(params[:enhanced_filter] == "Yes")
         bool_enhanced = true
@@ -13,6 +15,7 @@ class CriminalsController < ApplicationController
         bool_enhanced = false
       end
     end
+    
     if(params[:felon_filter].nil? == false) 
       if(params[:felon_filter] == "Yes")
         bool_felon = true
@@ -20,6 +23,8 @@ class CriminalsController < ApplicationController
         bool_felon = false
       end
     end
+    
+    # set @criminals based on boolean values
     if((bool_enhanced.nil? == false) and bool_felon.nil?)
       @criminals = Criminal.where(enhanced_powers: bool_enhanced).alphabetical.paginate(page: params[:page]).per_page(10)
     elsif((bool_felon.nil? == false) and bool_enhanced.nil?)
@@ -35,7 +40,7 @@ class CriminalsController < ApplicationController
 
   def edit
   end
-
+  
   def create
     @criminal = Criminal.new(criminal_params)
     if @criminal.save
@@ -65,6 +70,15 @@ class CriminalsController < ApplicationController
     else
       @cases = @criminal.investigations.alphabetical.to_a
       render action: 'show'
+    end
+  end
+  
+  def search
+    redirect_back(fallback_location: home_path) if params[:query].blank?
+    @query = params[:query]
+    @criminals = Criminal.search(@query)
+    if(@criminals.size == 1)
+      redirect_to @criminals.first
     end
   end
  
