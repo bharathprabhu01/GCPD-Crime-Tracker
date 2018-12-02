@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show, :edit, :update, :destroy]
+  before_action :set_user, only: [:edit, :update, :destroy]
   before_action :check_login
   authorize_resource
 
@@ -38,7 +38,7 @@ class UsersController < ApplicationController
     if @user.destroy
       redirect_to users_url, notice: "Successfully removed #{@user.proper_name} from the PATS system."
     else
-      render action: 'show'
+      redirect_to @user.officer
     end
   end
 

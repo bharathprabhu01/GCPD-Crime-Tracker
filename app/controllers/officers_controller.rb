@@ -35,10 +35,8 @@ class OfficersController < ApplicationController
     respond_to do |format|
       if @officer.update_attributes(officer_params)
         format.html { redirect_to @officer, notice: "Updated all information" }
-        
       else
         format.html { render :action => "edit" }
-        
       end
     end
   end
@@ -49,6 +47,16 @@ class OfficersController < ApplicationController
     @officers = Officer.search(@query)
     if(@officers.size == 1)
       redirect_to @officers.first
+    end
+  end
+  
+  def destroy
+    if @officer.destroy
+      redirect_to officers_path, notice: "Successfully removed #{@officer.proper_name} from GCPD."
+    else
+      @current_assignments = @officer.assignments.current.chronological
+      @past_assignments = @officer.assignments.past.chronological
+      render action: 'show'
     end
   end
 
