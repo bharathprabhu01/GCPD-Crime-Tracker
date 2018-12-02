@@ -8,22 +8,30 @@
     <thead>
       <th>Name</th>
       <th>Rank</th>
-
-
-      <th class="align_center">Edit</th>
+      <th class="align_center">Options</th>
     </thead>
+    
     <% for officer in officers %>
       <tr>
-        <td><%= link_to officer.name, officer_path(officer) %></td>
+        <% if can? :show, officer %>
+          <td><%= link_to officer.name, officer_path(officer) %></td>
+        <% else %>
+          <td><%= officer.name %></td>
+        <% end %>
+        
         <td><%= officer.rank %></td>
-
-
-
-
-
+        
         <td class="align_center">
-          <%= link_to edit_officer_path(officer) do %>
+          <% if can? :edit, officer %>
+            <%= link_to edit_officer_path(officer) do %>
               <i class="material-icons">edit</i>
+            <% end %>
+          <% end %>
+          &nbsp;&nbsp;&nbsp;&nbsp; 
+          <% if can? :delete, officer %>
+            <%= link_to(officer_path(officer), method: :delete, data: { confirm: 'Are you sure you wish to delete this officer?' }) do %>
+              <i class="material-icons">delete</i>
+            <% end %>
           <% end %>
         </td>
       </tr>
