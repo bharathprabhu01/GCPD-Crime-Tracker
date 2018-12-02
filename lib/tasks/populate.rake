@@ -54,7 +54,7 @@ namespace :db do
     jgordon_user = FactoryBot.create(:user, username: "jgordon", role: "commish")
     jgordon  = FactoryBot.create(:officer, first_name: "Jim", last_name: "Gordon", rank: "Commissioner", user: jgordon_user, unit: headquarters, ssn: "064-23-0511")
     gloeb_user = FactoryBot.create(:user, username: "gloeb", role: "commish")
-    gloeb    = FactoryBot.create(:officer, first_name: "Gillian", last_name: "Loeb", rank: "Commissioner", user: jgordon_user, unit: headquarters, active: false)
+    gloeb    = FactoryBot.create(:officer, first_name: "Gillian", last_name: "Loeb", rank: "Commissioner", user: gloeb_user, unit: headquarters, active: false)
     sxue_user = FactoryBot.create(:user, username: "sxue", role: "officer")
     sxue     = FactoryBot.create(:officer, first_name: "Stacey", last_name: "Xue", rank: "Officer", user: sxue_user, unit: headquarters)
     nfields_user = FactoryBot.create(:user, username: "nfields", role: "chief")
