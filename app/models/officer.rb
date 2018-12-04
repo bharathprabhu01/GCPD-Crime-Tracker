@@ -2,6 +2,8 @@ class Officer < ApplicationRecord
   include AppHelpers::Activeable::InstanceMethods
   extend AppHelpers::Activeable::ClassMethods
   include AppHelpers::Validations
+  
+  attr_accessor :username, :password, :password_confirmation
 
   # Relationships
   belongs_to :unit
@@ -34,6 +36,10 @@ class Officer < ApplicationRecord
   def proper_name
     "#{first_name} #{last_name}"
   end
+  
+  # Delegates
+  delegate :username, to: :user, allow_nil: true
+  #delegate :role, to: :user, allow_nil: true
   
   def current_assignments
     current = self.assignments.select{|a| a.end_date.nil?}

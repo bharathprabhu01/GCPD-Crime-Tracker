@@ -1,7 +1,6 @@
 class InvestigationsController < ApplicationController
   before_action :set_investigation, only: [:show, :edit, :update, :close, :crimes]
   before_action :check_login
-  
   authorize_resource
 
   def index
