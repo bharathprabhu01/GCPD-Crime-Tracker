@@ -28,11 +28,6 @@ class Ability
         my_unit_id = user.officer.unit.id
         my_unit_id == this_unit.id
       end
-      
-      # they can read their own profile
-      can :read, User do |u|  
-        u.id == user.id
-      end
 
       # they can update their own profile
       can :update, User do |u|  
