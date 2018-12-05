@@ -13,4 +13,7 @@
 </div>
 
 <p>&nbsp;</p>
-<%= render :partial => "partials/add_new_object", locals: {model_name: 'officer'} %>
+
+<% if current_user.role? (:commish) %>
+  <%= render :partial => "partials/add_new_object", locals: {model_name: 'officer'} %>
+<% end %>

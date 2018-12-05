@@ -6,11 +6,15 @@
     <thead>
       <th>Name</th>
       <th>Rank</th>
-      <th class="align_center">Active Assignments</th>
+      <th class="align_center">No. of Active Assignments</th>
     </thead>
     <% for officer in @officers %>
       <tr>
-        <td><%= link_to officer.name, officer_path(officer) %></td>
+        <% if can?(:show, officer) %>
+          <td><%= link_to officer.name, officer_path(officer) %></td>
+        <% else %>
+          <td><%= officer.name %></td>
+        <% end %>
         <td><%= officer.rank %></td>
         <td class="align_center"><%= officer.assignments.current.count %></td>
       </tr>
