@@ -56,6 +56,13 @@ class InvestigationsController < ApplicationController
       redirect_to @investigations.first
     end
   end
+  
+  def close
+    @investigation.date_closed = Date.current
+    @investigation.save!
+    flash[:notice] = "Investigation has been closed."
+    redirect_to investigations_path
+  end
 
   private
   def set_investigation
