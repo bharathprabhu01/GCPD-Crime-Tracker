@@ -1,0 +1,9 @@
+<%= f.input :first_name, label_html: { class: 'active' } %>
+<%= f.input :last_name, label_html: { class: 'active' } %>
+<%= f.input :rank, collection: Officer::RANKS_LIST, label_html: { class: 'active' } %>
+<% if current_user.role?(:commish) %>
+  <%= f.input :role, collection: User::ROLES %>
+<% end %>
+<%= f.input :ssn, label_html: { class: 'active' } %>
+<%= f.input :active %>
+

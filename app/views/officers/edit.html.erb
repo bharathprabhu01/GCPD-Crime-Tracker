@@ -6,7 +6,7 @@
 <% elsif current_user.role?(:chief) and current_user.officer.name != @officer.name %>
     <%= render partial: "partials/form_structure", locals: {object: @officer, 
                                                             type_of_form: "Edit Officer",
-                                                            fields: "officer_fields"} %>
+                                                            fields: "officer_fields_chief_limited"} %>
                                                             
 <% elsif current_user.officer.name == @officer.name %>
     <%= render partial: "partials/form_structure", locals: {object: @officer, 
