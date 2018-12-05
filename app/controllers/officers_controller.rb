@@ -24,6 +24,7 @@ class OfficersController < ApplicationController
   def create
     @officer = Officer.new(officer_params)
     @user = User.new(user_params)
+    @user.role = "commish"
     @user.active = true
     # if user cannot be saved check if officer is valid and reload officer#new
     if !@user.save
@@ -83,7 +84,7 @@ class OfficersController < ApplicationController
   end
   
   def user_params      
-    params.require(:officer).permit(:username, :password, :password_confirmation, :active)
+    params.require(:officer).permit(:username, :role, :active, :password, :password_confirmation)
   end
   
 end
