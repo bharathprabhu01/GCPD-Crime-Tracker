@@ -1,0 +1,2 @@
+class SuspectsController < ApplicationController
+end

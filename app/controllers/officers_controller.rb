@@ -19,6 +19,7 @@ class OfficersController < ApplicationController
   end
 
   def edit
+    @user = @officer.user
   end
 
   def create
@@ -46,7 +47,7 @@ class OfficersController < ApplicationController
   def update
     respond_to do |format|
       if @officer.update_attributes(officer_params)
-        format.html { redirect_to @officer, notice: "Updated all information" }
+        format.html { redirect_to @officer, notice: "Updated all officer information" }
       else
         format.html { render :action => "edit" }
       end

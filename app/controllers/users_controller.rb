@@ -18,8 +18,8 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     @user.role = "commish" if current_user.role?(:commish)
     if @user.save
-      flash[:notice] = "Successfully added #{@user.proper_name} as a user."
-      redirect_to users_url
+      flash[:notice] = "Successfully added #{@user.officer.proper_name} as a user."
+      redirect_to officer_path(@user.officer)
     else
       render action: 'new'
     end
@@ -27,16 +27,17 @@ class UsersController < ApplicationController
 
   def update
     if @user.update_attributes(user_params)
-      flash[:notice] = "Successfully updated #{@user.proper_name}."
-      redirect_to users_url
+      flash[:notice] = "Successfully updated user information for #{@user.officer.proper_name}"
+      redirect_to officer_path(@user.officer)
     else
-      render action: 'edit'
+      flash[:error] = "Unable to update user, please check password (must be at least 4 characters long)"
+      redirect_to edit_officer_path(@user.officer)
     end
   end
 
   def destroy
     if @user.destroy
-      redirect_to users_url, notice: "Successfully removed #{@user.proper_name} from the PATS system."
+      redirect_to officers_path, notice: "Successfully removed #{@user.officer.proper_name} from the system."
     else
       redirect_to @user.officer
     end
