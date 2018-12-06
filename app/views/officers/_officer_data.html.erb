@@ -6,7 +6,10 @@
       <%= link_to @officer.unit.name, unit_path(@officer.unit) %>
       <% if @officer.user.role?(:chief) %>
         &nbsp;&nbsp;<i>*Unit Chief</i>
-      <% end%>     
+      <% end%>
+      <% if @officer.user.role?(:commish) %>
+        &nbsp;&nbsp;<i>*Commissioner</i>
+      <% end%> 
       <br /><br />
 
     <b>Current Rank:&nbsp;&nbsp;</b>
