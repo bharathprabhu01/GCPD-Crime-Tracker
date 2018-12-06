@@ -16,13 +16,19 @@
             </tr>
           <% end %>
       </table>
-
-		<%# allow to add a new assignment might be nice %>
-
+      <% if can? :new, Assignment %>
+      <div class="card-action">
+        <%= link_to "Add a new assignment", new_assignment_path(investigation_id: @investigation.id) %>
+      </div>
+    <% end %>
     </div>
   </div>
 <% else%>
-
-	<%# allow to add a new assignment might be nice %>
-
+  <% if can? :new, Assignment %>
+    <div class="card grey lighten-3">
+      <div class="card-action">
+        <%= link_to "Add a new assignment", new_assignment_path(investigation_id: @investigation.id) %>
+      </div>
+    </div>
+  <% end %>
 <% end%>

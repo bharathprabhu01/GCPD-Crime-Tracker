@@ -5,11 +5,15 @@ class AssignmentsController < ApplicationController
 
   def new
     @assignment = Assignment.new
+    session[:back] = request.referrer
     unless params[:officer_id].nil?
       @officer    = Officer.find(params[:officer_id])
       @officer_investigations = @officer.assignments.current.map{|a| a.investigation }
     end
-
+    unless params[:investigation_id].nil?
+      @investigation    = Investigation.find(params[:investigation_id])
+      @investigation_officers = @investigation.assignments.current.map{|a| a.officer }
+    end
   end
   
   def create
@@ -17,11 +21,18 @@ class AssignmentsController < ApplicationController
     @assignment.start_date = Date.current
     if @assignment.save
       flash[:notice] = "Successfully added assignment."
-      redirect_to officer_path(@assignment.officer)
-
+      redirect_to session[:back]
     else
-      @officer     = Officer.find(params[:assignment][:officer_id])
-      render action: 'new', locals: { officer: @officer }
+      unless params[:assignment][:officer_id] == ""
+        @officer     = Officer.find(params[:assignment][:officer_id])
+        @officer_investigations = @officer.assignments.current.map{|a| a.investigation }
+        render action: 'new', locals: { officer: @officer, officer_investigations: @officer_investigations }
+      end
+      unless params[:assignment][:investigation_id] == ""
+        @investigation     = Investigation.find(params[:assignment][:investigation_id])
+        @investigation_officers = @investigation.assignments.current.map{|a| a.officer }
+        render action: 'new', locals: { investigation: @investigation, investigation_officers: @investigation_officers }
+      end
     end
   end
 
@@ -30,7 +41,6 @@ class AssignmentsController < ApplicationController
     @assignment.end_date = Date.current
     @assignment.save
     redirect_to officer_path(@assignment.officer)
-
   end
 
   private
