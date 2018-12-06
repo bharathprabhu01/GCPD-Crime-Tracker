@@ -1,5 +1,14 @@
-<%= render :partial => "current_suspects" %>
-<br />
-<%= render :partial => "previous_suspects" %>
-<br />
-<%= render :partial => "investigation_notes" %>
+<% if current_user.role?(:officer) %>
+  <%= render :partial => "investigation_notes" %>
+  <br />
+  <%= render :partial => "current_suspects" %>
+  <br />
+  <%= render :partial => "previous_suspects" %>
+<% else %>
+  <%= render :partial => "current_suspects" %>
+  <br />
+  <%= render :partial => "previous_suspects" %>
+  <br />
+  <%= render :partial => "investigation_notes" %>
+<% end %>
+    
