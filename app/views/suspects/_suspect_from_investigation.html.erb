@@ -1,0 +1,24 @@
+<div class="row">
+  <div class="col s7">
+    <h4>New Suspect:</h4>
+    <%= simple_form_for(@suspect) do |f| %>
+      <%= f.error_notification %>
+      <div class="row">
+        <div class="form-inputs">
+          <%= f.input :criminal_id, collection: (Criminal.alphabetical.to_a - @investigation_criminals), include_blank: true %>
+          <%= f.input :investigation_id, as: :hidden, input_html: { value: @investigation.id } %>
+          <%= f.input :from, as: :hidden, input_html: { value: "investigation" } %>
+        </div>
+      </div>
+      <div class="row">
+        <div class="form-actions col s8">
+          <%= f.button :submit %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+  <div class="col s5">
+    <h4>For Investigation:</h4>
+    <h5><%= @investigation.title %></h5>
+  </div>
+</div>

@@ -40,9 +40,10 @@ class AssignmentsController < ApplicationController
     @assignment = Assignment.find(params[:id])
     @assignment.end_date = Date.current
     @assignment.save
+    flash[:notice] = "Assignment has been ended."
     redirect_to officer_path(@assignment.officer)
   end
-
+  
   private
   def assignment_params
     params.require(:assignment).permit(:investigation_id, :officer_id, :start_date, :end_date)

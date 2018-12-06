@@ -1,0 +1,23 @@
+<% if @previous_suspects.empty? %>
+  <h5>No previous suspects</h5>
+<% else%>
+  <div class="card grey lighten-3">
+    <div class="card-content">
+      <span class="card-title">Previous Suspects</span>
+      <table class="lined">
+        <thead>
+          <th>Criminal</th>
+          <th>Dropped On</th>
+        </thead>
+          <% for suspect in @previous_suspects %>
+            <tr>
+              <td>&nbsp;<%= link_to suspect.criminal.name, criminal_path(suspect.criminal) %></td>
+              <td>
+                <%= suspect.dropped_on.strftime("%m/%d/%y") %>
+              </td>
+            </tr>
+          <% end %>
+      </table>
+    </div>
+  </div>
+<% end%>

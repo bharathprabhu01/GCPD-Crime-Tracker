@@ -1,0 +1,39 @@
+<% unless @current_suspects.empty? %>
+  <div class="card">
+    <div class="card-content">
+      <span class="card-title">Current Suspects</span>
+      <table class="lined">
+        <thead>
+          <th>Criminal</th>
+          <th>Added On</th>
+        </thead>
+          <% for suspect in @current_suspects %>
+            <tr>
+              <td>
+                <% if can? :remove, Suspect %>
+                  <%= link_to(remove_suspect_path(suspect, from: "investigation"), class: 'remove', method: :patch) do %>
+                    x&nbsp;&nbsp;
+                  <% end %>
+                <% end %>
+                &nbsp;<%= link_to suspect.criminal.name, criminal_path(suspect.criminal) %>
+              </td>
+              <td><%= suspect.added_on.strftime("%m/%d/%y") %></td>
+            </tr>
+          <% end %>
+      </table>
+      <% if can? :new, Suspect %>
+      <div class="card-action">
+        <%= link_to "Add a new suspect", new_suspect_path(investigation_id: @investigation.id) %>
+      </div>
+    <% end %>
+    </div>
+  </div>
+<% else%>
+  <% if can? :new, Suspect %>
+    <div class="card grey lighten-3">
+      <div class="card-action">
+        <%= link_to "Add a new suspect", new_suspect_path(investigation_id: @investigation.id) %>
+      </div>
+    </div>
+  <% end %>
+<% end%>
