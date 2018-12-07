@@ -1,6 +1,13 @@
 <div class="row">
   <% if logged_in? %>
     <h4>Welcome <%= current_user.officer.rank %> <%= current_user.officer.last_name %>!</h4>
+    <% if current_user.role? :commish %>
+      <%= render :partial => "commish_dashboard" %>
+    <% elsif current_user.role? :chief %>
+      <%= render :partial => "chief_dashboard" %>
+    <% else %>
+      <%= render :partial => "officer_dashboard" %>
+    <% end %>
   <% else %>
     <h4>Welcome to the GCPD Crime Tracking System</h4>
     <div class="col s8">
