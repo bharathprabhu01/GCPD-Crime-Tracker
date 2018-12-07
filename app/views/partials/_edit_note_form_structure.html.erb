@@ -1,0 +1,28 @@
+<div class="row">
+  <div class="col s8">
+    <div class="card">    
+      <div class="card-content">
+        <span class="card-title"><%= type_of_form %></span>
+        <%= simple_form_for(object) do |f| %>
+          <%= f.error_notification %>
+          <div class="row">
+            <div class="form-inputs">
+              <%= render partial: "#{fields}", locals: { f: f } %>
+          </div>
+        </div>
+      </div>
+    </div>
+      <div class="row">
+        <div class="form-actions col s9">
+          <%= f.button :submit %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+  
+  <div class="col s4">
+    <h4>For Investigation:</h4>
+    <h5><%= @note.investigation.title %></h5>
+  </div>
+</div>
+<%= link_to 'Back', :back %>

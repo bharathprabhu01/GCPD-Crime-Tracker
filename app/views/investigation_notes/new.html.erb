@@ -1,0 +1,25 @@
+<div class="row">
+  <div class="col s7">
+    <h4>New Investigation Note:</h4>
+    <%= simple_form_for(@note) do |f| %>
+      <%= f.error_notification %>
+      <div class="row">
+        <div class="form-inputs">
+          <%= f.input :officer_id, as: :hidden, input_html: { value: @officer.id } %>
+          <%= f.input :content, label_html: { class: 'active' } %>
+          <%= f.input :investigation_id, as: :hidden, input_html: { value: @investigation.id } %>
+          <%= f.input :from, as: :hidden, input_html: { value: "investigation" } %>
+        </div>
+      </div>
+      <div class="row">
+        <div class="form-actions col s8">
+          <%= f.button :submit %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+  <div class="col s5">
+    <h4>For Investigation:</h4>
+    <h5><%= @investigation.title %></h5>
+  </div>
+</div>

@@ -1,0 +1,47 @@
+<% unless @notes.empty? %>
+  <div class="card">
+    <div class="card-content">
+      <span class="card-title">Investigation Notes</span>
+      <table class="lined">
+        <thead>
+          <th>Officer Name</th>
+          <th>Date</th>
+          <th>Content</th>
+        </thead>
+          <% for note in @notes %>
+            <tr>
+              <td>
+                <% if can?(:show, note.officer) %>
+                  <%= link_to note.officer.name, officer_path(note.officer) %>
+                <% else %>
+                  <%= note.officer.name %>
+                <% end %>
+              </td>
+              <td><%= note.date.strftime("%m/%d/%y") %></td>
+              <td><%= note.content %></td>
+              <td>
+                <% if note.officer.name == current_user.officer.name %>
+                  <%= link_to(edit_investigation_note_path(note), class: 'edit', method: :get) do %>
+                    <i class="material-icons">edit</i>
+                  <% end %>
+                <% end %>
+              </td>
+            </tr>
+          <% end %>
+      </table>
+      <% if @investigation.assignments.current.map{|a| a.officer.name}.include? current_user.officer.name %>
+        <div class="card-action">
+          <%= link_to "Add a new Note", new_investigation_note_path(investigation_id: @investigation.id, officer_id: current_user.officer.id) %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+<% else%>
+  <% if @investigation.assignments.current.map{|a| a.officer.name}.include? current_user.officer.name %>
+    <div class="card grey lighten-3">
+      <div class="card-action">
+        <%= link_to "Add a new Note", new_investigation_note_path(investigation_id: @investigation.id, officer_id: current_user.officer.id) %>
+      </div>
+    </div>
+  <% end %>
+<% end%>

@@ -15,7 +15,12 @@
                     x&nbsp;&nbsp;
                   <% end %>
                 <% end %>
-                &nbsp;<%= link_to assignment.officer.name, officer_path(assignment.officer) %>
+                &nbsp;
+                <% if can? :show, assignment.officer %>
+                  <%= link_to assignment.officer.name, officer_path(assignment.officer) %>
+                <% else %>
+                  <%= assignment.officer.name %>
+                <% end %>
               </td>
               <td><%= assignment.start_date.strftime("%m/%d/%y") %></td>
             </tr>
