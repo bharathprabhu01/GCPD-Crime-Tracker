@@ -6,21 +6,13 @@ class CriminalsController < ApplicationController
   def index
     @criminals = Criminal.alphabetical.paginate(page: params[:page]).per_page(10)
     bool_enhanced, bool_felon = nil, nil
-    
     # set boolean values to filter index page
     if(params[:enhanced_filter].nil? == false) 
-      if(params[:enhanced_filter] == "Yes")
-        bool_enhanced = true
-      else
-        bool_enhanced = false
+      if(params[:enhanced_filter] == "Yes" ? bool_enhanced = true : bool_enhanced = false)
       end
     end
-    
     if(params[:felon_filter].nil? == false) 
-      if(params[:felon_filter] == "Yes")
-        bool_felon = true
-      else
-        bool_felon = false
+      if(params[:felon_filter] == "Yes" ? bool_felon = true : bool_felon = false)
       end
     end
     
