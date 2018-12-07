@@ -1,0 +1,23 @@
+<div class="row">
+  <div class="col s7">
+    <h4>New Crime Committed</h4>
+    <%= simple_form_for(@crime_investigation) do |f| %>
+      <%= f.error_notification %>
+      <div class="row">
+        <div class="form-inputs">
+          <%= f.input :investigation_id, as: :hidden, input_html: { value: @investigation.id } %>
+          <%= f.input :crime_id, collection: (Crime.active.alphabetical.to_a - @investigation.crime_investigations.map{|c| c.crime }) %>
+        </div>
+      </div>
+      <div class="row">
+        <div class="form-actions col s8">
+          <%= f.button :submit, 'Add Crime' %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+  <div class="col s5">
+    <h4>For Investigation:</h4>
+    <h5><%= @investigation.title %></h5>
+  </div>
+</div>

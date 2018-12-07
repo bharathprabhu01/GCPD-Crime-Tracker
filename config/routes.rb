@@ -45,6 +45,7 @@ Rails.application.routes.draw do
   resources :investigations
   resources :crimes
   resources :investigation_notes
+  resources :crime_investigations
 
   # You can have the root of your site routed with 'root'
   root 'home#index'

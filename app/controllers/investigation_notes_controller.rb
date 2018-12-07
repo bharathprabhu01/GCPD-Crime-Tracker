@@ -18,7 +18,6 @@ class InvestigationNotesController < ApplicationController
   def create
     @note = InvestigationNote.new(investigation_note_params)
     @note.date = Date.current
-    byebug
     if @note.save
       redirect_to investigation_path(@note.investigation), notice: "Successfully added note to #{@note.investigation.title}"
     else

@@ -37,8 +37,6 @@ class CrimesController < ApplicationController
     end
   end
 
-
-
   private
   def crime_params
     params.require(:crime).permit(:name, :felony, :active)

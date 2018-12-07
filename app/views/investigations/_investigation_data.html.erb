@@ -3,16 +3,19 @@
     <h5>Information for <%= @investigation.title %></h5><br />
 
     <b>Crimes committed:&nbsp;&nbsp;</b><br />
-      <% @case_crimes.each do |crime| %> 
-        <!-- <li><%# crime.name %></li> -->
-
-
-        <%= crime.name %><br />
+      <% @case_crimes.each do |crime| %>
+        <%= link_to(crime_investigation_path(CrimeInvestigation.where(crime_id: crime.id, investigation_id: @investigation.id).first), class: 'remove', method: :delete) do %>
+          x&nbsp;&nbsp;
+        <% end %>
+        <%= crime.name %><br/>
       <% end %>
-
-
+      <% if can? :new, CrimeInvestigation %>
+        <div class="card-action">
+          <%= link_to "Add Crime", new_crime_investigation_path(investigation_id: @investigation.id) %>
+        </div>
+      <% end %>
       <br /><br />
-
+      
     <b>Location:&nbsp;&nbsp;</b>
       <%= @investigation.crime_location %>   
       <br /><br />
