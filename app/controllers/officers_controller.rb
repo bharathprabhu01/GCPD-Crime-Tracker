@@ -49,8 +49,10 @@ class OfficersController < ApplicationController
     respond_to do |format|
       if @officer.update_attributes(officer_params) and @user.update_attributes(user_params)
         format.html { redirect_to @officer, notice: "Updated all officer information" }
+        format.json { respond_with_bip(@officer) }
       else
         format.html { render :action => "edit" }
+        format.json { respond_with_bip(@officer) }
       end
     end
   end

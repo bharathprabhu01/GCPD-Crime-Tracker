@@ -29,10 +29,10 @@ class CrimesController < ApplicationController
     respond_to do |format|
       if @crime.update_attributes(crime_params)
         format.html { redirect_to @crime, notice: "Updated information" }
-
+        format.json { respond_with_bip(@crime) }
       else
         format.html { render :action => "edit" }
-
+        format.json { respond_with_bip(@crime) }
       end
     end
   end

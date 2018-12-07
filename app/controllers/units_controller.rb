@@ -34,8 +34,10 @@ class UnitsController < ApplicationController
     respond_to do |format|
       if @unit.update_attributes(unit_params)
         format.html { redirect_to @unit, notice: "Updated information" }
+        format.json { respond_with_bip(@unit) }
       else
         format.html { render :action => "edit" }
+        format.json { respond_with_bip(@unit) }
       end
     end
   end
