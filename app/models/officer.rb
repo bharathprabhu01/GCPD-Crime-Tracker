@@ -86,6 +86,7 @@ class Officer < ApplicationRecord
       remove_assignments_from_inactive_officer
     end
     @destroyable = nil
+    errors.add(:base, "Officer cannot be deleted because of previous assignments, but officer status has been set to inactive.")
   end
 
   def remove_assignments_from_inactive_officer

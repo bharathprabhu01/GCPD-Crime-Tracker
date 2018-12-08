@@ -10,6 +10,7 @@ class OfficersController < ApplicationController
   end
 
   def show
+    print(@officer.errors.messages)
     @current_assignments = @officer.assignments.current.chronological
     @past_assignments = @officer.assignments.past.chronological
   end

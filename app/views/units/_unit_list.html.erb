@@ -11,7 +11,7 @@
   <table class="striped highlight">
     <thead>
       <th>Unit</th>
-      <% if can? :edit, units %>
+      <% if current_user.role?(:commish) %>
         <th>Status</th>
       <% end %>
       <% if can? :read, units %>
@@ -27,7 +27,7 @@
           <td><%= unit.name %></td>
         <% end %>
         
-        <% if can? :edit, unit %>
+        <% if current_user.role?(:commish) %>
           <td class = "btn tooltipped unitStatus" data-position="right" data-tooltip="Click to Toggle Status">
             <%= best_in_place unit, :active, as: :checkbox, collection: ["Inactive", "Active"] %>
           </td>

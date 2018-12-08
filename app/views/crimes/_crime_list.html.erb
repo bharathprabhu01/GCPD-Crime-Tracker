@@ -14,7 +14,7 @@
     <thead>
       <th>Crime</th>
       <th>Level</th>
-      <% if can? :edit, crimes %>
+      <% if current_user.role?(:commish) %>
         <th>Status</th>
       <% end %>
       <% if can? :edit, crimes %>
@@ -25,8 +25,8 @@
     <!-- Data --> 
     <% for crime in crimes %>
       <tr>
-        <% if can? :edit, crime %>
-          <td><%= best_in_place crime, :name, as: :input %></td>
+        <% if current_user.role?(:commish) %>
+          <td class = "tooltipped" data-position="top" data-tooltip="Click to Edit Crime Name"><%= best_in_place crime, :name, as: :input %></td>
         <% else %>
           <td><%= crime.name %></td>
         <% end %>
