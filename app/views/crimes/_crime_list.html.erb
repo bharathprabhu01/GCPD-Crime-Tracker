@@ -1,3 +1,8 @@
+
+<div data-alert data-options="animation_speed:500, animation:'fadeOut';" id = "crimeAlert" class="alert-box success hide">
+  Crime Status Updated
+</div>
+
 <h4><%= state.capitalize %> Crimes in GCPD</h4>
 
 <% if crimes.empty? %>
@@ -9,6 +14,7 @@
     <thead>
       <th>Crime</th>
       <th>Level</th>
+      <th>Active?</th>
       <% if can? :edit, crimes %>
         <th class="align_center">Edit</th>
       <% end %>
@@ -19,12 +25,15 @@
       <tr>
         <% if can? :edit, crimes %>
           <td><%= best_in_place crime, :name, as: :input %></td>
-          <td><%= crime.felony ? "Felony" : "Misdemeanor" %></td>
         <% else %>
           <td><%= crime.name %></td>
-          <td><%= crime.felony ? "Felony" : "Misdemeanor" %></td>
         <% end %>
         
+        <td><%= crime.felony ? "Felony" : "Misdemeanor" %></td>
+        
+        <td class = "btn tooltipped crimeStatus" data-position="bottom" data-tooltip="Click to Toggle Active Status">
+          <%= best_in_place crime, :active, as: :checkbox, collection: ["Inactive", "Active"] %>
+        </td>
         <% if can? :edit, crimes %>
           <td class="align_center">
             <%= link_to edit_crime_path(crime) do %>

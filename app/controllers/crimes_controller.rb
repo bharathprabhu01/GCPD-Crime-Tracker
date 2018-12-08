@@ -28,7 +28,7 @@ class CrimesController < ApplicationController
     @crime = Crime.find(params[:id])
     respond_to do |format|
       if @crime.update_attributes(crime_params)
-        format.html { redirect_to @crime, notice: "Updated information" }
+        format.html { redirect_to crimes_path, notice: "Updated Crime information" }
         format.json { respond_with_bip(@crime) }
       else
         format.html { render :action => "edit" }

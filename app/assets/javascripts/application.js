@@ -16,6 +16,8 @@
 //= require materialize-form
 //= require vue
 //= require best_in_place
+//= require jquery.purr
+//= require best_in_place.purr
 //= require_tree .
 
 // @import "materialize";
@@ -51,6 +53,10 @@ $(document).ready(function(){
 // Best in place functionality
 $(document).ready(function() {
   jQuery(".best_in_place").best_in_place();
+  var hash = window.location.hash;
+  if (hash == "#refresh") {
+    $( "#crimeAlert" ).removeClass( "hide" )
+  }
 });
 
 // Search submit on enter
@@ -69,4 +75,15 @@ $(document).ready(function() {
 // Or with jQuery
 $('.dropdown-trigger').dropdown();
 
+// Tooltip
+$(document).ready(function(){
+  $('.tooltipped').tooltip();
+});
+
+
+// Toggle Crime
+$('.crimeStatus').click(function(){
+  window.location =   window.location.href.replace(window.location.hash,"") + "#refresh";
+  window.location.reload();
+});
 
