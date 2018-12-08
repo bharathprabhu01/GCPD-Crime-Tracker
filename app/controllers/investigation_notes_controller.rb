@@ -12,7 +12,6 @@ class InvestigationNotesController < ApplicationController
   end
 
   def edit
-    @note = InvestigationNote.find(params[:id])
   end
 
   def create
@@ -28,14 +27,6 @@ class InvestigationNotesController < ApplicationController
   end
 
   def update
-    @note = InvestigationNote.find(params[:id])
-    respond_to do |format|
-      if @note.update_attributes(investigation_note_params)
-        format.html { redirect_to @note.investigation, notice: "Updated note for #{@note.investigation.title}" }
-      else
-        format.html { render :action => "edit" }
-      end
-    end
   end
 
   private

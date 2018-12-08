@@ -19,13 +19,6 @@
               </td>
               <td><%= note.date.strftime("%m/%d/%y") %></td>
               <td><%= note.content %></td>
-              <td>
-                <% if note.officer.name == current_user.officer.name %>
-                  <%= link_to(edit_investigation_note_path(note), class: 'edit', method: :get) do %>
-                    <i class="material-icons">edit</i>
-                  <% end %>
-                <% end %>
-              </td>
             </tr>
           <% end %>
       </table>
