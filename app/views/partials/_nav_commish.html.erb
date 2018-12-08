@@ -1,7 +1,6 @@
 <nav id="nav">
   <div class="container">
     <ul class="left hide-on-med-and-down">
-      <li><%= link_to 'My Account', officer_path(current_user.officer) %></li>
       <li><%= link_to 'Investigations', investigations_path %></li>
       <li><%= link_to 'Officers', officers_path %></li>
       <li><%= link_to 'Units', units_path %></li>
@@ -9,6 +8,7 @@
       <li><%= link_to 'Criminals', criminals_path %></li>
     </ul>
     <ul class="right">
+      <li><%= link_to 'My Account', officer_path(current_user.officer) %></li>
       <li><%= link_to 'Logout', logout_path %></li>
     </ul>
   </div>

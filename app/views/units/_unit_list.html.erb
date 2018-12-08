@@ -28,7 +28,7 @@
         <% end %>
         
         <% if current_user.role?(:commish) %>
-          <td class = "btn tooltipped unitStatus" data-position="right" data-tooltip="Click to Toggle Status">
+          <td class = "btn tooltipped unitStatus" data-position="right" data-tooltip="Click to Toggle Unit Status">
             <%= best_in_place unit, :active, as: :checkbox, collection: ["Inactive", "Active"] %>
           </td>
         <% end %>
@@ -40,7 +40,7 @@
               <i class="material-icons">edit</i>
             <% end %>
           <% end %>
-          &nbsp;&nbsp;&nbsp;&nbsp; 
+          &nbsp;&nbsp;
           <% if can? :delete, unit %>
             <%= link_to(unit_path(unit), method: :delete, data: { confirm: 'Are you sure you wish to delete this unit?' }) do %>
               <i class="material-icons">delete</i>

@@ -31,7 +31,7 @@
     </div>
   </div>
 <% else%>
-  <% if can? :new, Assignment %>
+  <% if can? :new, Assignment and @officer.active? %>
     <div class="card grey lighten-3">
       <div class="card-action">
         <%= link_to "Add a new assignment", new_assignment_path(officer_id: @officer.id) %>
