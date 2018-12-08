@@ -1,3 +1,7 @@
+<div data-alert data-options="animation_speed:500, animation:'fadeOut';" id = "crimeAlert" class="alert-box success hide">
+  Unit Status Updated
+</div>
+
 <h4><%= state.capitalize %> Units in GCPD</h4>
 
 <% if units.empty? %>
@@ -7,6 +11,9 @@
   <table class="striped highlight">
     <thead>
       <th>Unit</th>
+      <% if can? :edit, units %>
+        <th>Status</th>
+      <% end %>
       <% if can? :read, units %>
         <th class="align_center">Options</th>
       <% end %>
@@ -18,6 +25,12 @@
           <td><%= link_to unit.name, unit_path(unit) %></td>
         <% else %>
           <td><%= unit.name %></td>
+        <% end %>
+        
+        <% if can? :edit, unit %>
+          <td class = "btn tooltipped unitStatus" data-position="right" data-tooltip="Click to Toggle Status">
+            <%= best_in_place unit, :active, as: :checkbox, collection: ["Inactive", "Active"] %>
+          </td>
         <% end %>
         
         <!-- Edit and Delete Paths -->

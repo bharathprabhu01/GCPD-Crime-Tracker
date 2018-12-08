@@ -14,7 +14,9 @@
     <thead>
       <th>Crime</th>
       <th>Level</th>
-      <th>Active?</th>
+      <% if can? :edit, crimes %>
+        <th>Status</th>
+      <% end %>
       <% if can? :edit, crimes %>
         <th class="align_center">Edit</th>
       <% end %>
@@ -23,7 +25,7 @@
     <!-- Data --> 
     <% for crime in crimes %>
       <tr>
-        <% if can? :edit, crimes %>
+        <% if can? :edit, crime %>
           <td><%= best_in_place crime, :name, as: :input %></td>
         <% else %>
           <td><%= crime.name %></td>
@@ -31,10 +33,13 @@
         
         <td><%= crime.felony ? "Felony" : "Misdemeanor" %></td>
         
-        <td class = "btn tooltipped crimeStatus" data-position="bottom" data-tooltip="Click to Toggle Active Status">
-          <%= best_in_place crime, :active, as: :checkbox, collection: ["Inactive", "Active"] %>
-        </td>
-        <% if can? :edit, crimes %>
+        <% if can? :edit, crime %>
+          <td class = "btn tooltipped crimeStatus" data-position="right" data-tooltip="Click to Toggle Status">
+            <%= best_in_place crime, :active, as: :checkbox, collection: ["Inactive", "Active"] %>
+          </td>
+        <% end %>
+        
+        <% if can? :edit, crime %>
           <td class="align_center">
             <%= link_to edit_crime_path(crime) do %>
                 <i class="material-icons">edit</i>
