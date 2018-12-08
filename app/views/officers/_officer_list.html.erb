@@ -1,3 +1,7 @@
+<div data-alert data-options="animation_speed:500, animation:'fadeOut';" id = "crimeAlert" class="alert-box success hide">
+  Officer Status Updated
+</div>
+
 <h4><%= state.capitalize %> Officers in GCPD</h4>
 
 <% if officers.empty? %>
@@ -8,6 +12,9 @@
     <thead>
       <th>Name</th>
       <th>Rank</th>
+      <% if can? :edit, officers %>
+        <th>Status</th>
+      <% end %>
       <th class="align_center">Options</th>
     </thead>
     
@@ -20,6 +27,12 @@
         <% end %>
         
         <td><%= officer.rank %></td>
+        
+        <% if can? :edit, officer %>
+          <td class = "btn tooltipped officerStatus" data-position="right" data-tooltip="Click to Toggle Status">
+            <%= best_in_place officer, :active, as: :checkbox, collection: ["Inactive", "Active"] %>
+          </td>
+        <% end %>
         
         <td class="align_center">
           <% if can? :edit, officer %>

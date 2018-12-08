@@ -93,3 +93,9 @@ $('.unitStatus').click(function(){
   window.location.reload();
 });
 
+// Toggle Crime
+$('.officerStatus').click(function(){
+  window.location =   window.location.href.replace(window.location.hash,"") + "#refresh";
+  window.location.reload();
+});
+
