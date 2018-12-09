@@ -69,6 +69,7 @@ GEM
       activemodel (>= 4.0.0)
       activesupport (>= 4.0.0)
       mime-types (>= 1.16)
+    chartkick (3.0.1)
     childprocess (0.9.0)
       ffi (~> 1.0, >= 1.0.11)
     chronic (0.10.2)
@@ -292,6 +293,7 @@ DEPENDENCIES
   cancancan (= 2.1.2)
   capybara (= 2.17.0)
   carrierwave (= 1.2.2)
+  chartkick (~> 3.0, >= 3.0.1)
   chronic (= 0.10.2)
   coffee-rails (~> 4.2)
   cucumber-rails

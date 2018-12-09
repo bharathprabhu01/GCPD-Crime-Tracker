@@ -3,7 +3,9 @@
   <head>
     <title>GCPD Tracking System</title>
     <%= csrf_meta_tags %>
-
+    
+    <%= javascript_include_tag "https://www.gstatic.com/charts/loader.js" %>
+    <%= javascript_include_tag 'application' %> 
     <%= stylesheet_link_tag 'application', media: 'all' %>
     <%= stylesheet_link_tag "https://fonts.googleapis.com/icon?family=Material+Icons" %>
     <%= stylesheet_link_tag "https://fonts.googleapis.com/css?family=Bitter|Josefin+Sans|Nunito|Varela+Round" %>
@@ -38,7 +40,7 @@
     </main>
     
     <%= render :partial => "partials/footer" %> 
-    <%= javascript_include_tag 'application' %>   
+    <%= javascript_include_tag 'application' %>    
   </body>
 </html>
 

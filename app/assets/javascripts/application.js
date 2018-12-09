@@ -20,6 +20,8 @@
 //= require best_in_place.purr
 //= require_tree .
 
+//= require chartkick
+
 // @import "materialize";
 // @import "https://fonts.googleapis.com/icon?family=Material+Icons";
 
