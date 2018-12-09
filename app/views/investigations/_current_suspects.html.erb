@@ -10,7 +10,7 @@
           <% for suspect in @current_suspects %>
             <tr>
               <td>
-                <% if can? :remove, Suspect %>
+                <% if can? :update, @investigation %>
                   <%= link_to(remove_suspect_path(suspect, from: "investigation"), class: 'remove', method: :patch) do %>
                     x&nbsp;&nbsp;
                   <% end %>
@@ -21,7 +21,7 @@
             </tr>
           <% end %>
       </table>
-      <% if can? :new, Suspect %>
+      <% if can? :update, @investigation %>
       <div class="card-action">
         <%= link_to "Add a new suspect", new_suspect_path(investigation_id: @investigation.id) %>
       </div>
@@ -29,7 +29,7 @@
     </div>
   </div>
 <% else%>
-  <% if can? :new, Suspect %>
+  <% if can? :update, @investigation %>
     <div class="card grey lighten-3">
       <div class="card-action">
         <%= link_to "Add a new suspect", new_suspect_path(investigation_id: @investigation.id) %>

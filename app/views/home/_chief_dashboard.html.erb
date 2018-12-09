@@ -30,11 +30,11 @@
         <b>Current Rank:&nbsp;&nbsp;</b>
           <%= @officer.rank %><br /><br />
     
-        <b>SSN:&nbsp;&nbsp;</b>
-          <%= @officer.ssn %><br /><br />
-    
-        <b>Username:&nbsp;&nbsp;</b>
-          <%= @officer.user.username %><br /><br />
+    <b>SSN:&nbsp;&nbsp;</b>
+      <text class = "tooltipped" data-position="top" data-tooltip="Click to Edit SSN"><%= best_in_place @officer, :ssn, as: :input %></text><br /><br />
+
+    <b>Username:&nbsp;&nbsp;</b>
+      <text class = "tooltipped" data-position="top" data-tooltip="Click to Edit Username"><%= best_in_place @officer, :username, as: :input %></text><br /><br />
     
         <b>Active with GCPD?&nbsp;&nbsp;</b>
           <%= @officer.active ? "Yes" : "No" %><br><br><br>
