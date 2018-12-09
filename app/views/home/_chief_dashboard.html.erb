@@ -2,7 +2,7 @@
   <div class="col s8">
     <div class="card">
       <div class="card-content">
-        <h5><center>OPEN CASES BY OFFICER - MAJOR CRIMES</center></h5><br />
+        <h5><center>OPEN CASES BY OFFICER - <%= current_user.officer.unit.name.upcase %></center></h5><br />
         <% @unit = current_user.officer.unit %>
         <% @unit_officers_cases = Assignment.current.joins(:officer).where("officers.unit_id == ?", @unit.id).group("officers.first_name").size %>
         <%= column_chart @unit_officers_cases , xtitle: "Officer", ytitle: "Open Cases"%>
@@ -55,6 +55,7 @@
           <thead>
             <th>Officer</th>
           </thead>
+            <% @unit_officers = Officer.for_unit(@unit.id).alphabetical %>
             <% for officer in @unit_officers %>
               <tr>
                 <td>

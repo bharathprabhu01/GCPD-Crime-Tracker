@@ -1,6 +1,14 @@
 <% @current_assignments = @officer.assignments.current.chronological %>
 <% @past_assignments = @officer.assignments.past.chronological %>
 
+<% if @current_assignments.empty? and @past_assignments.empty? %>
+  <div class="card">
+    <div class="card-content">
+      <h5><b>NO INVESTIGATIONS</b></h5>
+    </div>
+  </div>
+<% end %>
+
 <% unless @current_assignments.empty? %>
   <div class="card">
     <div class="card-content">
