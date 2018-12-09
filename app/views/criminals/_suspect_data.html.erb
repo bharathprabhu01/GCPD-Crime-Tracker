@@ -5,12 +5,12 @@
       <table class="lined">
         <thead>
           <th>Case</th>
-          <th>Open?</th>
+          <th>Is a Suspect?</th>
         </thead>
           <% for investigation in @cases %>
             <tr>
               <td>&nbsp;<%= link_to investigation.title, investigation_path(investigation) %></td>
-              <td><%= investigation.date_closed.nil? ? "Yes" : "No" %></td>
+              <td><%= @criminal.suspects.where(investigation: investigation).nil? ? "Yes" : "No" %></td>
             </tr>
           <% end %>
       </table>

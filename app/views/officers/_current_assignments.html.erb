@@ -6,20 +6,18 @@
         <thead>
           <th>Case</th>
           <th>Started</th>
-          <th>Solved?</th>
         </thead>
           <% for assignment in @current_assignments %>
             <tr>
               <td>
                 <% if can? :terminate, Assignment %>
                   <%= link_to(terminate_assignment_path(assignment, from: "officer"), class: 'remove', method: :patch) do %>
-                    x&nbsp;&nbsp;
+                    x
                   <% end %>
                 <% end %>
                 &nbsp;<%= link_to assignment.investigation.title, investigation_path(assignment.investigation) %>
               </td>
               <td><%= assignment.start_date.strftime("%m/%d/%y") %></td>
-              <td><%= assignment.investigation.solved? %></td>
             </tr>
           <% end %>
       </table>

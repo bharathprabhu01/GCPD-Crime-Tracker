@@ -4,7 +4,7 @@
 <% if current_user.role?(:commish) %>
   <%= f.input :role, collection: User::ROLES %>
 <% end %>
-<%= f.input :unit_id, collection: Unit.alphabetical.to_a, include_blank: true %>
+<%= f.input :unit_id, collection: Unit.active.alphabetical.to_a, include_blank: true %>
 <%= f.input :ssn, label_html: { class: 'active' } %>
 <%= f.input :active %>
 

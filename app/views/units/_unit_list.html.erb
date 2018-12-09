@@ -14,6 +14,8 @@
       <% if current_user.role?(:commish) %>
         <th>Status</th>
       <% end %>
+      <th>Active Officers</th>
+      <th>Current Investigations</th>
       <% if can? :read, units %>
         <th class="align_center">Options</th>
       <% end %>
@@ -31,7 +33,11 @@
           <td class = "btn tooltipped unitStatus" data-position="right" data-tooltip="Click to Toggle Unit Status">
             <%= best_in_place unit, :active, as: :checkbox, collection: ["Inactive", "Active"] %>
           </td>
+          &nbsp;
         <% end %>
+        
+        <td class = "center-align"><%= unit.number_of_active_officers %></td>
+        <td class = "center-align"><%= unit.number_of_unique_open_investigations %></td>
         
         <!-- Edit and Delete Paths -->
         <td class="align_center">

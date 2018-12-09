@@ -21,6 +21,7 @@ class InvestigationsController < ApplicationController
 
   def new
     @investigation = Investigation.new
+    @active_crimes = Crime.active.all
   end
 
   def edit
@@ -29,7 +30,7 @@ class InvestigationsController < ApplicationController
   def create 
     @investigation = Investigation.new(investigation_params)
     if @investigation.save
-      redirect_to investigations_path, notice: "Successfully added #{@investigation.title} to GCPD."
+      redirect_to investigation_path(@investigation), notice: "Successfully added #{@investigation.title} to GCPD."
     else
       render action: 'new'
     end

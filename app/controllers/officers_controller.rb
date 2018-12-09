@@ -26,11 +26,10 @@ class OfficersController < ApplicationController
   def create
     @officer = Officer.new(officer_params)
     @user = User.new(user_params)
-    @user.role = "commish"
     @user.active = true
-    # if user cannot be saved check if officer is valid and reload officer#new
     if !@user.save
       @officer.valid?
+      flash[:error] = @user.errors.full_messages.first
       render action: 'new'
     
     # user can be saved, so try saving the officer
@@ -69,6 +68,7 @@ class OfficersController < ApplicationController
   
   def destroy
     if @officer.destroy
+      @officer.user.destroy
       redirect_to officers_path, notice: "Successfully removed #{@officer.proper_name} from GCPD."
     else
       @current_assignments = @officer.assignments.current.chronological

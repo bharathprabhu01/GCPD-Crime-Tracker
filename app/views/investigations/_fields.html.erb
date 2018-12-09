@@ -2,6 +2,6 @@
 <%= f.input :description, label_html: { class: 'active' } %>
 <%= f.input :crime_location, label_html: { class: 'active' } %>
 <%= f.input :date_opened, label_html: { class: 'active' } %>
-<%= f.input :date_closed, label_html: { class: 'active' } %>
+<%= f.input :date_closed,  as: :hidden, input_html: { value: nil } %>
 <%= f.input :batman_involved %>
 <%= f.input :solved %>

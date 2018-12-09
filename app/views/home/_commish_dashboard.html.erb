@@ -2,8 +2,7 @@
   <div class="col s6">
     <div class="card">
       <div class="card-content">
-        <h5><center>MOST WANTED CRIMINALS IN GCPD</center></h5><br />
-        
+        <h5><center><b>MOST WANTED CRIMINALS IN GCPD</b></center></h5><br />
         <table class="lined">
           <thead>
             <th>Criminal</th>
@@ -26,7 +25,7 @@
   <div class="col s6">
     <div class="card">
       <div class="card-content">
-        <h5><center>BATMAN METRICS</center></h5><br />
+        <h5><center><b>BATMAN METRICS</b></center></h5><br />
           <% @batman_metrics = [['Batman Involved', Investigation.where(batman_involved: true).size], ['Batman Not Involved', Investigation.where(batman_involved: false).size]] %>
           <%= pie_chart @batman_metrics, colors: ["#b00", "#666"] %>
       </div>
@@ -35,21 +34,42 @@
 </div>
 
 <div class="row">
-  <div class="col s12">
+  <div class="col s8">
     <div class="card">
       <div class="card-content">
-        <h5><center>NUMBER OF CASES BY WEEK (LAST 2 MONTHS) </center></h5><br />
+        <h5><center><b>NUMBER OF CASES BY WEEK (LAST 2 MONTHS)</b></center></h5><br />
         <%= line_chart Investigation.group_by_week(:date_opened).count.reverse_each.take(8), xtitle: "Time Period", ytitle: "No. of Cases"%>
+      </div>
+    </div>
+  </div>
+  <div class="col s4">
+    <div class="card">
+      <div class="card-content">
+        <h5><center><b>ADD</b></center></h5><br />
+        <table class="lined">
+          <thead>
+            <th>Option</th>
+          </thead>
+            <% @functionalities = ["unit", "crime", "criminal", "investigation", "officer"] %>
+            <% for functionality in @functionalities %>
+              <tr>
+                <td>
+                  <%= functionality.capitalize %>
+                </td>
+                <td><%= link_to '+', eval("new_#{functionality}_path()") %></td>
+              </tr>
+            <% end %>
+        </table>
       </div>
     </div>
   </div>
 </div>
 
 <div class="row">
-  <div class="col s12">
+  <div class="col s6">
     <div class="card">
       <div class="card-content">
-        <h5><center>LONGEST OPEN INVESTIGATIONS</center></h5><br />
+        <h5><center><b>LONGEST OPEN INVESTIGATIONS</b></center></h5><br />
         
         <table class="lined">
           <thead>
@@ -68,12 +88,12 @@
       </div>
     </div>
   </div>
-  <div class="col s12">
+  <div class="col s6">
     <div class="card">
       <div class="card-content">
-        <h5><center>NUMBER OF OFFICERS PER UNIT</center></h5><br />
+        <h5><center><b>NUMBER OF OFFICERS PER UNIT</b></center></h5><br />
         <% @officers_per_unit = Officer.joins(:unit).group('units.name').count %>
-        <%= bar_chart @officers_per_unit, xtitle: "No. of Officers", ytitle: "Units"%>
+        <%= column_chart @officers_per_unit, xtitle: "No. of Officers", ytitle: "Units"%>
       </div>
     </div>
   </div>
