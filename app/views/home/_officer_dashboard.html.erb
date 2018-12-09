@@ -1,3 +1,16 @@
 <%= render partial: "partials/structure1", locals: {primary: "officer_main", 
                                                     secondary: nil,
                                                     sidebar: "officer_sidebar"} %>
+<div class = "row">                                                  
+  <div class="col s12">
+    <div class="card">
+      <div class="card-content">
+        <h5><center>INVESTIGATION PERFORMANCE</center></h5><br />
+          <% @closed_unsolved = Investigation.where(solved: false).where.not(date_closed: nil).joins(:officers).where("officers.id == ?", @officer.id).size %>
+          <%= @closed_solved = Investigation.where(solved: true).where.not(date_closed: nil).joins(:officers).where("officers.id == ?", @officer.id).size %>
+          <% @investigation_history = [['Closed Unsolved', @closed_unsolved], ['Closed Solved', @closed_solved]] %>
+          <%= pie_chart @investigation_history, colors: ["#b00", "#666"] %>
+      </div>
+    </div>
+  </div>
+</div> 
