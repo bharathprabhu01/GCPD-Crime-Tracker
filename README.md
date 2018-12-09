@@ -1,6 +1,8 @@
 GCPD Tracker System 
 ===
-This is the starter code for Phase 5 of the Gotham City Police Department Tracker System.  This project was assigned in the fall of 2018 as a 67-272 project at Carnegie Mellon University, Information Systems department.  More information about the project can be found at [67272.cmuis.net](https://67272.cmuis.net).
+This is the completed code for Phase 5 of the Gotham City Police Department Tracker System.  This project was assigned in the fall of 2018 as a 67-272 project at Carnegie Mellon University, Information Systems department.  More information about the project can be found at [67272.cmuis.net](https://67272.cmuis.net).
+
+It is a fully functional crime tracking system with all CRUD operations working. Authentication and Authorization for all necessary personnel have been handled.
 
 Populating the dev database
 ---
@@ -13,7 +15,7 @@ Notes on tests
 ---
 There is 100% test coverage for existing models and helpers.  However, if there are significant changes to some of the existing models, then tests should be updated so that coverage remains at 100%.
 
-The one exception to the above rule is the Ability model, where you have a complete set of tests, but no model so all tests will fail.  (Of course, you will rectify this situation during this phase.)
+Controllers and Views have been written but have not been tested to allow for user flexibility.
 
 
 Cloning this repo
@@ -24,6 +26,8 @@ After cloning this repo to your laptop, switch into the project directory and re
   git remote rm origin
 ```
 
-This will stop you from accidentally trying to push changes to Prof. H's repo (which won't be accepted).  Now it is recommended that instead you set up a connection to your remote repository on darkknight soon and begin saving your code there early in your development.  There is no limit on the number of times you can commit code to the remote repository and remember that committing to your local repository does not automatically mean the remote repository has been updated.
+This will stop you from accidentally trying to push changes to to the default remote repository
 
+
+HAPPY CRIMINAL HUNTING AND MAY THE FORCE BE WITH YOU!
 
