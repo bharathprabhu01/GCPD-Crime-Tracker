@@ -2,16 +2,20 @@
   <div class="col s8">
     <div class="card">
       <div class="card-content">
-        <h5><center>OPEN CASES BY OFFICER - <%= current_user.officer.unit.name.upcase %></center></h5><br />
         <% @unit = current_user.officer.unit %>
         <% @unit_officers_cases = Assignment.current.joins(:officer).where("officers.unit_id == ?", @unit.id).group("officers.first_name").size %>
-        <%= column_chart @unit_officers_cases , xtitle: "Officer", ytitle: "Open Cases"%>
+        <% if @unit_officers_cases.size == 0 %>
+          <h3><center><b>NO CASES FOR <%= @unit.name.upcase %></b></center></h3>
+        <% else %>
+          <h5><center><b>OPEN CASES BY OFFICER - <%= current_user.officer.unit.name.upcase %></b></center></h5><br />
+          <%= column_chart @unit_officers_cases , xtitle: "Officer", ytitle: "Open Cases"%>
+        <% end %>
       </div>
     </div>
     
     <div class="card">
       <div class="card-content">
-        <h5><center>Information for <%= current_user.officer.proper_name %></center></h5><br />
+        <h5><center><b>INFORMATION FOR <%= current_user.officer.proper_name.upcase %></b></center></h5><br />
         <% @officer = current_user.officer %>
           <b>Current Unit:&nbsp;&nbsp;</b>
           <%= link_to @officer.unit.name, unit_path(@officer.unit) %>
@@ -47,26 +51,32 @@
     <% end %>
     &nbsp;&nbsp;
   </div>
+  
+  
   <div class="col s4">
     <div class="card">
       <div class="card-content">
-        <h5><center>ADD ASSIGNMENT</center></h5><br />
+        <h5><center><b>ADD ASSIGNMENT</b></center></h5><br />
         <table class="lined">
           <thead>
             <th>Officer</th>
           </thead>
-            <% @unit_officers = Officer.for_unit(@unit.id).alphabetical %>
-            <% for officer in @unit_officers %>
-              <tr>
-                <td>
-                  <%= link_to officer.proper_name, officer_path(officer) %>
-                </td>
-                <td>
-                  <%= link_to '+', new_assignment_path(officer_id: officer.id) %>
-                </td>
-              </tr>
-            <% end %>
+          <% @unit_officers = Officer.for_unit(@unit.id).alphabetical.take(6) %>
+          <% for officer in @unit_officers %>
+            <tr>
+              <td>
+                <%= link_to officer.proper_name, officer_path(officer) %>
+              </td>
+              <td>
+                <%= link_to '+', new_assignment_path(officer_id: officer.id) %>
+              </td>
+            </tr>
+          <% end %>
         </table>
+        <br>
+        <% if @unit_officers.size != @unit.officers.size %>
+          <%= link_to  "VIEW ALL MY OFFICERS", unit_path(current_user.officer.unit), class: 'waves-effect waves-light btn' %>
+        <% end %>
       </div>
     </div>
   </div>
