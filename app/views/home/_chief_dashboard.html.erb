@@ -1,3 +1,72 @@
-<%= render partial: "partials/structure1", locals: {primary: "chief_main", 
-                                                    secondary: nil,
-                                                    sidebar: "chief_sidebar"} %>
+<div class="row">
+  <div class="col s8">
+    <div class="card">
+      <div class="card-content">
+        <h5><center>OPEN CASES BY OFFICER - MAJOR CRIMES</center></h5><br />
+        <% @unit = current_user.officer.unit %>
+        <% @unit_officers_cases = Assignment.current.joins(:officer).where("officers.unit_id == ?", @unit.id).group("officers.first_name").size %>
+        <%= column_chart @unit_officers_cases , xtitle: "Officer", ytitle: "Open Cases"%>
+      </div>
+    </div>
+    
+    <div class="card">
+      <div class="card-content">
+        <h5><center>Information for <%= current_user.officer.proper_name %></center></h5><br />
+        <% @officer = current_user.officer %>
+          <b>Current Unit:&nbsp;&nbsp;</b>
+          <%= link_to @officer.unit.name, unit_path(@officer.unit) %>
+          <% if @officer.user.role?(:chief) %>
+            &nbsp;&nbsp;<i>*Unit Chief</i>
+          <% end%>
+          <% if @officer.user.role?(:commish) %>
+            &nbsp;&nbsp;<i>*Commissioner</i>
+          <% end%> 
+          <br /><br />
+    
+        <b>Current Rank:&nbsp;&nbsp;</b>
+          <%= @officer.rank %><br /><br />
+    
+        <b>SSN:&nbsp;&nbsp;</b>
+          <%= @officer.ssn %><br /><br />
+    
+        <b>Username:&nbsp;&nbsp;</b>
+          <%= @officer.user.username %><br /><br />
+    
+        <b>Active with GCPD?&nbsp;&nbsp;</b>
+          <%= @officer.active ? "Yes" : "No" %><br><br><br>
+      </div>
+    </div>
+    
+    <%= link_to(eval("edit_officer_path(@officer)"), class: 'waves-effect waves-light btn') do %>
+        &nbsp;Edit <%= @officer.name %>
+    <% end %>
+    &nbsp;&nbsp;
+    
+    <%= link_to(eval("officers_path"), class: 'waves-effect waves-light btn') do %>
+        &nbsp;Display All Officers
+    <% end %>
+    &nbsp;&nbsp;
+  </div>
+  <div class="col s4">
+    <div class="card">
+      <div class="card-content">
+        <h5><center>ADD ASSIGNMENT</center></h5><br />
+        <table class="lined">
+          <thead>
+            <th>Officer</th>
+          </thead>
+            <% for officer in @unit_officers %>
+              <tr>
+                <td>
+                  <%= link_to officer.proper_name, officer_path(officer) %>
+                </td>
+                <td>
+                  <%= link_to '+', new_assignment_path(officer_id: officer.id) %>
+                </td>
+              </tr>
+            <% end %>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

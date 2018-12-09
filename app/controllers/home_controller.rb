@@ -8,7 +8,7 @@ class HomeController < ApplicationController
       @top_crimes = Crime.all.active.sort_by{|c| c.crime_investigations.size}.reverse.take(5)
       
       # chief dashboard
-      @unit_officers = Officer.for_unit(current_user.officer.unit).sort_by{|o| o.investigations.size }
+      @unit_officers = Officer.for_unit(current_user.officer.unit).active.sort_by{|o| o.investigations.size }
       
       # officer dashboard
     end

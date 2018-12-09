@@ -1,3 +1,80 @@
-<%= render partial: "partials/structure1", locals: {primary: "commish_main", 
-                                                    secondary: nil,
-                                                    sidebar: "commish_sidebar"} %>
+<div class="row">
+  <div class="col s6">
+    <div class="card">
+      <div class="card-content">
+        <h5><center>MOST WANTED CRIMINALS IN GCPD</center></h5><br />
+        
+        <table class="lined">
+          <thead>
+            <th>Criminal</th>
+            <th>No. of Open Cases</th>
+            <th>Powers?</th>
+          </thead>
+            <% for criminal in @most_wanted_criminals %>
+              <tr>
+                <td>
+                  <%= link_to criminal.name, criminal_path(criminal) %>
+                </td>
+                <td><%= criminal.suspects.size %></td>
+                <td><%= criminal.enhanced_powers %></td>
+              </tr>
+            <% end %>
+        </table>
+      </div>
+    </div>
+  </div>
+  <div class="col s6">
+    <div class="card">
+      <div class="card-content">
+        <h5><center>BATMAN METRICS</center></h5><br />
+          <% @batman_metrics = [['Batman Involved', Investigation.where(batman_involved: true).size], ['Batman Not Involved', Investigation.where(batman_involved: false).size]] %>
+          <%= pie_chart @batman_metrics, colors: ["#b00", "#666"] %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col s12">
+    <div class="card">
+      <div class="card-content">
+        <h5><center>NUMBER OF CASES BY WEEK (LAST 2 MONTHS) </center></h5><br />
+        <%= line_chart Investigation.group_by_week(:date_opened).count.reverse_each.take(8), xtitle: "Time Period", ytitle: "No. of Cases"%>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col s12">
+    <div class="card">
+      <div class="card-content">
+        <h5><center>LONGEST OPEN INVESTIGATIONS</center></h5><br />
+        
+        <table class="lined">
+          <thead>
+            <th>Case</th>
+            <th>Duration open</th>
+          </thead>
+            <% for investigation in @longest_open_investigations %>
+              <tr>
+                <td>
+                  <%= link_to investigation.title, investigation_path(investigation) %>
+                </td>
+                <td><%= distance_of_time_in_words(investigation.date_opened, Date.current) %></td>
+              </tr>
+            <% end %>
+        </table>
+      </div>
+    </div>
+  </div>
+  <div class="col s12">
+    <div class="card">
+      <div class="card-content">
+        <h5><center>NUMBER OF OFFICERS PER UNIT</center></h5><br />
+        <% @officers_per_unit = Officer.joins(:unit).group('units.name').count %>
+        <%= bar_chart @officers_per_unit, xtitle: "No. of Officers", ytitle: "Units"%>
+      </div>
+    </div>
+  </div>
+</div>
